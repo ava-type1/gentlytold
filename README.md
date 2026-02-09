@@ -77,6 +77,7 @@ Copy `data/jerry-gloria.json` and modify it. All fields:
 | `businesses` | object[] | no | Array of `{name, location, description}` |
 | `businessesSectionTitle` | string | no | Title for businesses section |
 | `businessesIntro` | string | no | Intro paragraph |
+| `videos` | object[] | no | Array of video objects (see below) |
 | `photos` | object[] | yes | Array of `{src, alt}` for gallery |
 | `familyMembers` | string[] | yes | Names of family members |
 | `familyIntro` | string | no | Family section intro text |
@@ -90,6 +91,19 @@ Copy `data/jerry-gloria.json` and modify it. All fields:
 | `funeralHomePhone` | string | no | Phone number |
 | `funeralHomeWebsite` | string | no | Website URL |
 | `funeralHomeTagline` | string | no | Tagline |
+
+#### Video Objects
+
+Each video in the `videos` array:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | yes | `"youtube"`, `"vimeo"`, or `"direct"` |
+| `url` | string | yes | Video URL (YouTube/Vimeo link, or direct MP4 URL) |
+| `caption` | string | no | Description shown below the video |
+| `thumbnail` | string | no | Poster image URL (for `direct` type only) |
+
+YouTube and Vimeo IDs are extracted automatically from standard URL formats. The section is omitted entirely if `videos` is empty or missing.
 
 ### 2. Generate
 
@@ -198,6 +212,6 @@ Styled elegantly — not like an ad. Visible to every visitor, permanent.
 - [ ] Automatic generation from intake form
 - [ ] Custom domain support (jerry-and-gloria.gentlytold.com)
 - [ ] QR code generation for funeral programs
-- [ ] Video memorial support
+- [x] Video memorial support (YouTube, Vimeo, direct MP4)
 - [ ] Guestbook with moderation
 - [ ] Analytics for funeral homes (page views, shares)

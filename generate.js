@@ -190,6 +190,69 @@ function buildBusinessesSection() {
     return html;
 }
 
+// --- Build videos section ---
+function buildVideosSection() {
+    if (!data.videos || data.videos.length === 0) return '';
+
+    let html = `    <!-- Cherished Moments -->\n    <section class="section">\n        <h2>Cherished Moments</h2>\n        <div class="section-divider"></div>\n        <div class="videos-grid">\n`;
+
+    data.videos.forEach(video => {
+        html += `            <div class="video-card">\n`;
+        html += `                <div class="video-wrapper">\n`;
+
+        if (video.type === 'youtube') {
+            const videoId = extractYouTubeId(video.url);
+            if (videoId) {
+                html += `                    <iframe src="https://www.youtube-nocookie.com/embed/${esc(videoId)}" title="${esc(video.caption || '')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>\n`;
+            }
+        } else if (video.type === 'vimeo') {
+            const videoId = extractVimeoId(video.url);
+            if (videoId) {
+                html += `                    <iframe src="https://player.vimeo.com/video/${esc(videoId)}?dnt=1" title="${esc(video.caption || '')}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>\n`;
+            }
+        } else if (video.type === 'direct') {
+            html += `                    <video controls preload="metadata"`;
+            if (video.thumbnail) {
+                html += ` poster="${esc(video.thumbnail)}"`;
+            }
+            html += `>\n`;
+            html += `                        <source src="${esc(video.url)}" type="video/mp4">\n`;
+            html += `                        Your browser does not support the video tag.\n`;
+            html += `                    </video>\n`;
+        }
+
+        html += `                </div>\n`;
+
+        if (video.caption) {
+            html += `                <div class="video-caption">${esc(video.caption)}</div>\n`;
+        }
+
+        html += `            </div>\n`;
+    });
+
+    html += `        </div>\n    </section>`;
+    return html;
+}
+
+function extractYouTubeId(url) {
+    if (!url) return null;
+    // Handle youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID, youtube.com/shorts/ID
+    const patterns = [
+        /(?:youtube\.com\/watch\?.*v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+    ];
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+    }
+    return null;
+}
+
+function extractVimeoId(url) {
+    if (!url) return null;
+    const match = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    return match ? match[1] : null;
+}
+
 // --- Build gallery ---
 function buildGallery() {
     if (!data.photos || data.photos.length === 0) {
@@ -262,6 +325,7 @@ const replacements = {
     '{{timelineHTML}}': buildTimeline(),
     '{{newsSection}}': buildNewsSection(),
     '{{businessesSection}}': buildBusinessesSection(),
+    '{{videosSection}}': buildVideosSection(),
     '{{galleryHTML}}': buildGallery(),
     '{{shareMemoryText}}': data.shareMemoryText || `If they touched your life, we'd love to hear from you. Share a story, a memory, or a photo.`,
     '{{relationshipLabel}}': esc(data.relationshipLabel || 'How did you know them?'),
@@ -290,5 +354,5 @@ if (!fs.existsSync(outputDir)) {
 fs.writeFileSync(outputFile, output, 'utf8');
 console.log(`✓ Memorial page generated: ${outputFile}`);
 console.log(`  Title: ${pageTitle}`);
-console.log(`  Sections: story, timeline${data.newsArticles ? ', news' : ''}${data.businesses ? ', businesses' : ''}, gallery, memories, family`);
+console.log(`  Sections: story, timeline${data.newsArticles ? ', news' : ''}${data.businesses ? ', businesses' : ''}${data.videos && data.videos.length ? ', videos' : ''}, gallery, memories, family`);
 console.log(`  Funeral home: ${data.funeralHomeName || 'none'}`);

@@ -1086,6 +1086,21 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
             </div>
 
             <div style="border-top: 1px solid rgba(196, 164, 120, 0.1); padding-top: 2rem; margin-top: 1rem;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #c4a478; font-size: 1.15rem; margin-bottom: 0.5rem;">Videos <span style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 0.8rem; color: #7a7068;">(optional)</span></h3>
+                <p style="font-weight: 300; font-size: 0.85rem; color: #7a7068; margin-bottom: 1.25rem;">Add YouTube or Vimeo links of cherished moments — a wedding toast, a birthday message, anything that brings them to life.</p>
+                <div id="videoEntries">
+                    <div class="video-entry" style="margin-bottom: 1rem; padding: 1rem; border: 1px solid rgba(196, 164, 120, 0.12); border-radius: 8px; background: rgba(196, 164, 120, 0.02);">
+                        <div style="display: grid; grid-template-columns: 1fr 40px; gap: 0.75rem; align-items: start;">
+                            <input type="url" placeholder="Paste YouTube or Vimeo URL" class="vid-url" style="width: 100%; padding: 0.6rem 0.8rem; background: rgba(196, 164, 120, 0.06); border: 1px solid rgba(196, 164, 120, 0.2); border-radius: 4px; color: #e8e0d8; font-family: 'Lato', sans-serif; font-size: 0.9rem; outline: none;">
+                            <button class="remove-btn" onclick="removeEntry(this, 'videoEntries')" title="Remove">×</button>
+                        </div>
+                        <input type="text" placeholder="Caption (optional) — e.g. 'Reading to Emma, Christmas 2019'" class="vid-caption" style="width: 100%; margin-top: 0.5rem; padding: 0.6rem 0.8rem; background: rgba(196, 164, 120, 0.06); border: 1px solid rgba(196, 164, 120, 0.15); border-radius: 4px; color: #e8e0d8; font-family: 'Lato', sans-serif; font-size: 0.85rem; outline: none;">
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addVideo()">+ Add Video</button>
+            </div>
+
+            <div style="border-top: 1px solid rgba(196, 164, 120, 0.1); padding-top: 2rem; margin-top: 2rem;">
                 <h3 style="font-family: 'Playfair Display', serif; color: #c4a478; font-size: 1.15rem; margin-bottom: 1.5rem;">Funeral Home Branding</h3>
 
                 <div class="form-group">
@@ -1640,10 +1655,25 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
             container.appendChild(entry);
         }
 
+        function addVideo() {
+            const container = document.getElementById('videoEntries');
+            const entry = document.createElement('div');
+            entry.className = 'video-entry';
+            entry.style.cssText = 'margin-bottom: 1rem; padding: 1rem; border: 1px solid rgba(196, 164, 120, 0.12); border-radius: 8px; background: rgba(196, 164, 120, 0.02);';
+            entry.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 40px; gap: 0.75rem; align-items: start;">
+                    <input type="url" placeholder="Paste YouTube or Vimeo URL" class="vid-url" style="width: 100%; padding: 0.6rem 0.8rem; background: rgba(196, 164, 120, 0.06); border: 1px solid rgba(196, 164, 120, 0.2); border-radius: 4px; color: #e8e0d8; font-family: 'Lato', sans-serif; font-size: 0.9rem; outline: none;">
+                    <button class="remove-btn" onclick="removeEntry(this, 'videoEntries')" title="Remove">×</button>
+                </div>
+                <input type="text" placeholder="Caption (optional) — e.g. 'Reading to Emma, Christmas 2019'" class="vid-caption" style="width: 100%; margin-top: 0.5rem; padding: 0.6rem 0.8rem; background: rgba(196, 164, 120, 0.06); border: 1px solid rgba(196, 164, 120, 0.15); border-radius: 4px; color: #e8e0d8; font-family: 'Lato', sans-serif; font-size: 0.85rem; outline: none;">
+            `;
+            container.appendChild(entry);
+        }
+
         function removeEntry(btn, containerId) {
             const container = document.getElementById(containerId);
             if (container.children.length > 1) {
-                btn.closest('.timeline-entry, .family-entry').remove();
+                btn.closest('.timeline-entry, .family-entry, .video-entry').remove();
             }
         }
 
@@ -1741,6 +1771,12 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
             html += '<div class="review-section"><h3>Photos & Branding</h3>';
             const photoCount = uploadedPhotos.filter(p => p !== null).length;
             html += reviewField('Photos', photoCount + ' photo(s) uploaded');
+            const vidEntries = document.querySelectorAll('#videoEntries .video-entry');
+            let vidCount = 0;
+            vidEntries.forEach(entry => {
+                if (entry.querySelector('.vid-url').value.trim()) vidCount++;
+            });
+            if (vidCount > 0) html += reviewField('Videos', vidCount + ' video(s)');
             if (val('funeralHomeName')) html += reviewField('Funeral Home', val('funeralHomeName'));
             if (val('funeralHomePhone')) html += reviewField('Phone', val('funeralHomePhone'));
             if (val('funeralHomeWebsite')) html += reviewField('Website', val('funeralHomeWebsite'));
@@ -1778,6 +1814,19 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
                 if (name) familyMembers.push(name);
             });
 
+            // Gather videos
+            const videos = [];
+            document.querySelectorAll('#videoEntries .video-entry').forEach(entry => {
+                const url = entry.querySelector('.vid-url').value.trim();
+                const caption = entry.querySelector('.vid-caption').value.trim();
+                if (url) {
+                    let type = 'direct';
+                    if (/youtube\.com|youtu\.be/i.test(url)) type = 'youtube';
+                    else if (/vimeo\.com/i.test(url)) type = 'vimeo';
+                    videos.push({ type, url, caption: caption || '' });
+                }
+            });
+
             const data = {
                 isCouple: memorialType === 'couple',
                 personName1: val('personName1'),
@@ -1798,6 +1847,7 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
                 funeralHomeWebsite: val('funeralHomeWebsite'),
                 funeralHomeTagline: val('funeralHomeTagline'),
                 formEmail: val('formEmail'),
+                videos,
                 photoCount: uploadedPhotos.filter(p => p !== null).length,
                 hasLogo: !!uploadedLogo,
                 wasAutofilled: wasAutofilled,
