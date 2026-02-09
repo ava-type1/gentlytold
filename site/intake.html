@@ -1796,8 +1796,13 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
         }
 
         // --- Submit ---
-        function submitForm() {
+        const ENGINE_URL = 'https://gentlytold-engine.kameronmartinllc.workers.dev';
+
+        async function submitForm() {
             const val = id => (document.getElementById(id)?.value || '').trim();
+            const submitBtn = document.querySelector('.btn-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Generating Memorial...';
             
             // Gather timeline
             const timelineItems = [];
@@ -1856,13 +1861,65 @@ John David Smith, age 85, of Fort White, Florida, passed away peacefully on Janu
 
             console.log('Memorial submission:', JSON.stringify(data, null, 2));
 
-            // Show success
-            document.getElementById('formContainer').style.display = 'none';
-            document.getElementById('progressBar').style.display = 'none';
-            document.getElementById('quickStart').style.display = 'none';
-            document.getElementById('sectionDivider').style.display = 'none';
-            document.getElementById('successMessage').classList.add('visible');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            try {
+                const resp = await fetch(ENGINE_URL + '/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await resp.json();
+
+                if (!resp.ok || !result.success) {
+                    throw new Error(result.error || 'Submission failed');
+                }
+
+                // Build the full preview URL
+                const previewUrl = ENGINE_URL + result.previewUrl;
+
+                // Show success with preview link
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('progressBar').style.display = 'none';
+                document.getElementById('quickStart').style.display = 'none';
+                document.getElementById('sectionDivider').style.display = 'none';
+                
+                const successEl = document.getElementById('successMessage');
+                successEl.innerHTML = `
+                    <div class="check">✦</div>
+                    <h2>Memorial Page Created!</h2>
+                    <p>
+                        Your memorial page for <strong>${escHtml(val('personName1'))}</strong> has been generated.
+                        Review the preview below and approve it to publish.
+                    </p>
+                    <div style="margin: 2rem auto; max-width: 400px;">
+                        <a href="${escHtml(previewUrl)}" target="_blank" style="
+                            display: block; padding: 1.1rem 2rem;
+                            background: linear-gradient(135deg, #c4a478, #d4b488);
+                            color: #0a0a0a; border-radius: 8px;
+                            font-family: 'Playfair Display', serif; font-size: 1.15rem;
+                            text-decoration: none; text-align: center;
+                            font-weight: 600; transition: all 0.3s;
+                            box-shadow: 0 4px 16px rgba(196,164,120,0.3);
+                        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(196,164,120,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(196,164,120,0.3)'">
+                            View Your Preview →
+                        </a>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #7a7068;">
+                        Once approved, you'll receive a permanent link to share with family and friends.
+                    </p>
+                    <p style="margin-top: 2rem;">
+                        <a href="intake.html" style="color: #c4a478;">← Create Another Memorial</a>
+                    </p>
+                `;
+                successEl.classList.add('visible');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (err) {
+                console.error('Submit error:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Memorial Request';
+                alert('Something went wrong: ' + err.message + '\n\nPlease try again or email hello@gentlytold.com');
+            }
         }
     </script>
 </body>

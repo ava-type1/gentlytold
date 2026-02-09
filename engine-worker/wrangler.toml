@@ -1,0 +1,10 @@
+name = "gentlytold-engine"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+TELEGRAM_CHAT_ID = "8169497922"
+
+[[kv_namespaces]]
+binding = "PAGES"
+id = "692aad52ba324bf69179450338e5fb06"
