@@ -1,0 +1,49 @@
+{
+  "isCouple": false,
+  "isPet": true,
+  "petType": "Goldfish",
+
+  "personName1": "Granny",
+  "personBorn1": "Summer 2018",
+  "personDied1": "January 2026",
+
+  "heroQuote": "She never fetched, never purred, never barked at the mailman — but she was always there, circling gently, keeping watch over the family she loved.",
+
+  "heroPhoto": {
+    "src": "",
+    "alt": ""
+  },
+
+  "storyTitle": "Her Story",
+  "storyParagraphs": [
+    "It was supposed to be a throwaway prize. A tiny goldfish in a plastic bag, won at the Columbia County Fair in the summer of 2018 by a five-year-old who was really just there for the cotton candy. Nobody expected her to last the weekend.",
+    "But Granny — named by that same five-year-old, who thought she looked \"old and wise\" — had other plans. She settled into her bowl on the kitchen counter and quietly became the most dependable member of the household. Eight years, two house moves, one very curious cat, and a toddler with grabby hands later, Granny was still there. Still circling. Still watching.",
+    "She saw the family through homework battles and holiday dinners, late-night feedings and early-morning coffees. She was the first thing the kids checked on every morning and the last thing they said goodnight to. She didn't do tricks. She didn't cuddle. But she was present — always, quietly, faithfully present.",
+    "Granny passed peacefully in January 2026, at the grand old age of eight. For a carnival goldfish, that's nothing short of extraordinary. For the family who loved her, she was nothing short of extraordinary either."
+  ],
+
+  "timelineTitle": "A Life Well-Swum",
+  "timelineItems": [
+    { "year": "Summer 2018", "text": "Won at the Columbia County Fair by a very excited five-year-old. Arrived home in a plastic bag, was given a proper bowl within the hour, and a name by bedtime: Granny." },
+    { "year": "Fall 2018", "text": "Survived the Great Cat Incident of 2018 — when Luna the cat knocked her bowl off the counter at 2 AM. The family woke to water everywhere and Granny flopping heroically on the kitchen tile. She was scooped up, returned to water, and never seemed fazed." },
+    { "year": "2019", "text": "Upgraded from a bowl to a proper 10-gallon tank with a filter, a little castle, and a plant she immediately ignored. The family called it her \"mansion.\"" },
+    { "year": "Spring 2020", "text": "Moved with the family from the old apartment to the house on Maple Street. Traveled in a Tupperware container on Mom's lap. Handled it better than the kids." },
+    { "year": "2021", "text": "Survived the arrival of baby Theo, who spent his first year trying to put his hand in her tank. Granny learned to stay near the back wall. Smart fish." },
+    { "year": "2022", "text": "The family moved again — this time to the house on Birchwood Lane. Granny made the trip in the same Tupperware. She was a seasoned traveler by now." },
+    { "year": "2023", "text": "Turned five — already well past the typical lifespan of a fair goldfish. The kids threw her a birthday party. There was cake (not for Granny) and a new tank decoration (for Granny)." },
+    { "year": "2024", "text": "The five-year-old who won her was now eleven, and still checked on Granny every morning before school. Some things never change." },
+    { "year": "January 2026", "text": "Granny passed away peacefully in her tank, at the remarkable age of eight. The family buried her in the backyard under the magnolia tree, with a small painted rock to mark the spot." }
+  ],
+
+  "photos": [],
+
+  "familyMembers": ["The Millers"],
+  "familyIntro": "Granny was the quiet heart of the Miller household — outlasting two addresses, one cat, and a toddler. She was there for all of it.",
+  "familyNote": "She will be remembered every time someone walks past the magnolia tree.",
+
+  "closingQuote": "Sometimes the smallest creatures leave the biggest ripples.",
+
+  "formEmail": "codeClaude08@gmail.com",
+  "shareMemoryText": "Did Granny brighten your day? We'd love to hear about it. Share a memory of our little golden companion.",
+  "relationshipLabel": "How did you know Granny?"
+}

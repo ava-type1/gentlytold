@@ -1,0 +1,7 @@
+name = "gentlytold-memories"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "MEMORIES"
+id = "95f6006e9e7c40dab56de8f89c1b2858"
