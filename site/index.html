@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GentlyTold — Beautiful Memorial Pages for Funeral Homes</title>
+    <meta name="description" content="Offer families stunning, permanent memorial pages. $50 per page. Your branding on every page. A life, gently told.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0a0a;
+            color: #e8e0d8;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: #c4a478; text-decoration: none; }
+        a:hover { color: #d4b488; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(196, 164, 120, 0.08);
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #c4a478;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #a89880;
+            letter-spacing: 0.05rem;
+        }
+
+        .nav-links a:hover { color: #c4a478; }
+
+        .nav-cta {
+            padding: 0.5rem 1.25rem !important;
+            border: 1px solid rgba(196, 164, 120, 0.4) !important;
+            border-radius: 4px;
+            color: #c4a478 !important;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: rgba(196, 164, 120, 0.15) !important;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(196, 164, 120, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: #c4a478;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5.5vw, 4rem);
+            font-weight: 400;
+            color: #f5efe8;
+            line-height: 1.25;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: #c4a478;
+        }
+
+        .hero-sub {
+            font-weight: 300;
+            font-size: 1.15rem;
+            color: #a89880;
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #c4a478;
+            color: #0a0a0a;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #d4b488;
+            color: #0a0a0a;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: #c4a478;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            border-radius: 4px;
+            border: 1px solid rgba(196, 164, 120, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(196, 164, 120, 0.1);
+            border-color: #c4a478;
+        }
+
+        /* Sections */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-centered {
+            text-align: center;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #f5efe8;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: #c4a478;
+            margin: 1rem auto 3rem;
+        }
+
+        .section p {
+            font-weight: 300;
+            line-height: 1.9;
+            font-size: 1.05rem;
+            color: #d4ccc4;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Problem / Solution */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .ps-card {
+            padding: 2.5rem;
+            border-radius: 8px;
+        }
+
+        .ps-card.problem {
+            background: rgba(180, 80, 80, 0.06);
+            border: 1px solid rgba(180, 80, 80, 0.15);
+        }
+
+        .ps-card.solution {
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .ps-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #f5efe8;
+            margin-bottom: 1.5rem;
+        }
+
+        .ps-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ps-card ul li {
+            font-weight: 300;
+            color: #d4ccc4;
+            line-height: 1.7;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .ps-card.problem ul li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #b45050;
+        }
+
+        .ps-card.solution ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #c4a478;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #c4a478;
+            opacity: 0.4;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #f5efe8;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            font-weight: 300;
+            font-size: 0.95rem;
+            color: #a89880;
+            line-height: 1.7;
+        }
+
+        /* Demo Preview */
+        .demo-section {
+            background: rgba(196, 164, 120, 0.03);
+            border-top: 1px solid rgba(196, 164, 120, 0.08);
+            border-bottom: 1px solid rgba(196, 164, 120, 0.08);
+        }
+
+        .demo-frame {
+            max-width: 700px;
+            margin: 2rem auto;
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #111;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .demo-frame h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #f5efe8;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-frame .demo-dates {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-frame .demo-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #c4a478;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Pricing */
+        .pricing-card {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .pricing-card .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #c4a478;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-card .price-sub {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul li {
+            font-weight: 300;
+            color: #d4ccc4;
+            padding: 0.6rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(196, 164, 120, 0.06);
+        }
+
+        .pricing-card ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #c4a478;
+            font-size: 0.8rem;
+            top: 0.7rem;
+        }
+
+        /* Revenue Calculator */
+        .calculator {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.15);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-row label {
+            font-weight: 300;
+            color: #d4ccc4;
+            font-size: 1rem;
+        }
+
+        .calc-row input[type="range"] {
+            width: 200px;
+            accent-color: #c4a478;
+        }
+
+        .calc-row .calc-value {
+            font-family: 'Playfair Display', serif;
+            color: #c4a478;
+            font-size: 1.1rem;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .calc-result {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .calc-result .result-label {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-result .result-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #c4a478;
+        }
+
+        .calc-result .result-sub {
+            font-weight: 300;
+            color: #7a7068;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Branding showcase */
+        .branding-preview {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.12);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .branding-preview .bp-label {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #7a7068;
+            margin-bottom: 1rem;
+        }
+
+        .branding-preview .bp-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #c4a478;
+            margin-bottom: 0.4rem;
+        }
+
+        .branding-preview .bp-details {
+            font-weight: 300;
+            color: #7a7068;
+            font-size: 0.85rem;
+        }
+
+        .branding-preview .bp-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #a89880;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border-bottom: 1px solid rgba(196, 164, 120, 0.1);
+            padding: 1.5rem 0;
+        }
+
+        .faq-item:first-child {
+            border-top: 1px solid rgba(196, 164, 120, 0.1);
+        }
+
+        .faq-q {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #f5efe8;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .faq-a {
+            font-weight: 300;
+            color: #a89880;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(196, 164, 120, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #f5efe8;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.08);
+        }
+
+        .site-footer .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #c4a478;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-footer p {
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: #5a5450;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .problem-solution { grid-template-columns: 1fr; gap: 1.5rem; }
+            .steps { grid-template-columns: 1fr; gap: 1rem; }
+            .section { padding: 4rem 1.5rem; }
+            .calc-row { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            .calc-row input[type="range"] { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-brand">GentlyTold</div>
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#demo">Live Demo</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="intake.html" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-tag">For Funeral Homes</div>
+        <h1>Give every life <em>the page it deserves</em></h1>
+        <p class="hero-sub">
+            Beautiful, permanent memorial pages that honor the departed — and put your funeral home's name on every one. A premium offering your families will treasure forever.
+        </p>
+        <div class="hero-buttons">
+            <a href="intake.html" class="btn-primary">Create a Memorial Page</a>
+            <a href="#demo" class="btn-secondary">See Live Demo</a>
+        </div>
+    </section>
+
+    <!-- Problem / Solution -->
+    <section class="section" id="why">
+        <h2>The Problem We Solve</h2>
+        <div class="section-divider"></div>
+        <div class="problem-solution">
+            <div class="ps-card problem">
+                <h3>What families get today</h3>
+                <ul>
+                    <li>Generic obituary on a newspaper site — buried in ads</li>
+                    <li>Templated pages on legacy.com — cold and corporate</li>
+                    <li>Facebook posts that vanish in the algorithm</li>
+                    <li>Nothing permanent, nothing beautiful, nothing personal</li>
+                    <li>The funeral home's name? Nowhere to be found</li>
+                </ul>
+            </div>
+            <div class="ps-card solution">
+                <h3>What GentlyTold creates</h3>
+                <ul>
+                    <li>A stunning, dedicated memorial page — elegant and permanent</li>
+                    <li>Full life story with timeline, photos, and family</li>
+                    <li>Shareable link families send instead of an obituary</li>
+                    <li>Families can add memories and photos over time</li>
+                    <li>Your funeral home branded on every page — forever</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+        <h2>How It Works</h2>
+        <div class="section-divider"></div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Submit the Details</h3>
+                <p>Fill out our simple intake form with the person's story, dates, family, and photos. Paste an existing obituary or start fresh.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>We Build the Page</h3>
+                <p>Within 24 hours, we craft a beautiful, personalized memorial page with your funeral home's branding elegantly included.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Share & Grow</h3>
+                <p>Share the link with the family. They share it with everyone. Your funeral home name reaches hundreds — permanently.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section class="section demo-section" id="demo">
+        <h2>See It Live</h2>
+        <div class="section-divider"></div>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">
+            This is a real memorial page, built for a real family. Click through to see what your families could have.
+        </p>
+        <div class="demo-frame">
+            <div style="color: #c4a478; opacity: 0.6; font-size: 1.5rem; letter-spacing: 0.5rem; margin-bottom: 1rem;">✦ ✦ ✦</div>
+            <h3>Jerry Dane <span style="font-style: italic; color: #c4a478; font-size: 0.8em;">&</span> Gloria Marie Rhodes</h3>
+            <div class="demo-dates">July 3, 1946 — Feb 5, 2026 · January 16, 1945 — Feb 8, 2026</div>
+            <div class="demo-quote">"They lived as one, and in the end, not even death could part them for long."</div>
+            <a href="/rhodes-memorial/" class="btn-primary" target="_blank">View Full Memorial Page →</a>
+        </div>
+    </section>
+
+    <!-- Branding Angle -->
+    <section class="section" id="branding">
+        <h2>Your Brand, on Every Page</h2>
+        <div class="section-divider"></div>
+        <p style="text-align: center; max-width: 650px; margin: 0 auto 1rem;">
+            Every memorial page includes a tasteful, elegant footer with your funeral home's name, logo, phone number, and website. Not an ad — a mark of craftsmanship.
+        </p>
+        <p style="text-align: center; max-width: 650px; margin: 0 auto 2rem;">
+            When families share the link — and they <em>will</em> share it — your name goes with it. To every friend, relative, and community member who visits. <strong>Permanently.</strong>
+        </p>
+        <div class="branding-preview">
+            <div class="bp-label">Memorial lovingly prepared by</div>
+            <div class="bp-name">Your Funeral Home Name</div>
+            <div class="bp-details">(555) 123-4567 · www.yourfuneralhome.com</div>
+            <div class="bp-tagline">"Serving families with compassion"</div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+        <h2>Simple Pricing</h2>
+        <div class="section-divider"></div>
+        <div class="pricing-card">
+            <div class="price">$50</div>
+            <div class="price-sub">per memorial page — you charge whatever you want</div>
+            <ul>
+                <li>Beautiful, custom memorial page</li>
+                <li>Full life story, timeline, and photo gallery</li>
+                <li>Family contribution page for ongoing memories</li>
+                <li>Your funeral home branding on every page</li>
+                <li>Permanent hosting — pages live forever</li>
+                <li>Shareable link for the family</li>
+                <li>24-hour turnaround</li>
+                <li>Unlimited revisions</li>
+            </ul>
+            <a href="intake.html" class="btn-primary" style="width: 100%; display: block; text-align: center;">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Revenue Calculator -->
+    <section class="section section-centered">
+        <h2>Revenue Calculator</h2>
+        <div class="section-divider"></div>
+        <p style="text-align: center; max-width: 550px; margin: 0 auto 2rem;">
+            See what memorial pages could add to your bottom line. You set the price to families — we only charge $50.
+        </p>
+        <div class="calculator">
+            <div class="calc-row">
+                <label>Services per month</label>
+                <input type="range" id="calcServices" min="5" max="100" value="25" oninput="updateCalc()">
+                <span class="calc-value" id="calcServicesVal">25</span>
+            </div>
+            <div class="calc-row">
+                <label>Adoption rate</label>
+                <input type="range" id="calcAdoption" min="10" max="100" value="60" step="5" oninput="updateCalc()">
+                <span class="calc-value" id="calcAdoptionVal">60%</span>
+            </div>
+            <div class="calc-row">
+                <label>Your price to families</label>
+                <input type="range" id="calcPrice" min="100" max="500" value="200" step="25" oninput="updateCalc()">
+                <span class="calc-value" id="calcPriceVal">$200</span>
+            </div>
+            <div class="calc-result">
+                <div class="result-label">Your monthly profit</div>
+                <div class="result-number" id="calcResult">$2,250</div>
+                <div class="result-sub" id="calcResultSub">15 pages × $150 profit each</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <h2>Questions & Answers</h2>
+        <div class="section-divider"></div>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-q">How long does it take to create a page?</div>
+                <div class="faq-a">Most pages are ready within 24 hours of receiving the information. Rush orders can be completed same-day.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What do we need to provide?</div>
+                <div class="faq-a">Basic information: names, dates, a life story or existing obituary, photos, and family details. Our intake form walks you through everything. You can also paste an existing obituary and we'll craft the page from that.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How long do pages stay up?</div>
+                <div class="faq-a">Forever. Pages are permanently hosted at no additional cost. Families can share the link for years to come — with your funeral home's name on it the entire time.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can families add to the page later?</div>
+                <div class="faq-a">Yes. Each memorial includes a family contribution page where loved ones can submit additional memories and photos at any time. No login required.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What if the family wants changes?</div>
+                <div class="faq-a">Unlimited revisions are included. We want every page to be perfect.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can we handle couples?</div>
+                <div class="faq-a">Absolutely. The template handles both individual and couple memorial pages beautifully — perfect for spouses who pass close together.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What about our branding?</div>
+                <div class="faq-a">Every page includes a tasteful footer with your funeral home's name, logo, phone number, website, and tagline. It's elegant — not an ad — but it's visible to every single visitor. Permanent, beautiful brand exposure.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How much should we charge families?</div>
+                <div class="faq-a">That's entirely up to you. Most funeral homes charge $150–$300 per page. Our cost to you is $50, so you set your own margin. Some include it as a standard part of their package.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to offer something <em style="color: #c4a478;">beautiful</em>?</h2>
+        <p>Create your first memorial page today. No commitment, no contracts.</p>
+        <div class="hero-buttons">
+            <a href="intake.html" class="btn-primary">Create a Memorial Page</a>
+            <a href="mailto:hello@gentlytold.com" class="btn-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="brand">GentlyTold</div>
+        <p style="font-style: italic; color: #7a7068; margin-bottom: 1rem;">A life, gently told.</p>
+        <p>© 2026 GentlyTold. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function updateCalc() {
+            const services = parseInt(document.getElementById('calcServices').value);
+            const adoption = parseInt(document.getElementById('calcAdoption').value) / 100;
+            const price = parseInt(document.getElementById('calcPrice').value);
+            
+            document.getElementById('calcServicesVal').textContent = services;
+            document.getElementById('calcAdoptionVal').textContent = Math.round(adoption * 100) + '%';
+            document.getElementById('calcPriceVal').textContent = '$' + price;
+            
+            const pages = Math.round(services * adoption);
+            const profit = pages * (price - 50);
+            
+            document.getElementById('calcResult').textContent = '$' + profit.toLocaleString();
+            document.getElementById('calcResultSub').textContent = pages + ' pages × $' + (price - 50) + ' profit each';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const el = document.querySelector(a.getAttribute('href'));
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        updateCalc();
+    </script>
+</body>
+</html>

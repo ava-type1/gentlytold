@@ -1,0 +1,130 @@
+{
+  "isCouple": true,
+  "personName1": "Jerry Dane Rhodes",
+  "personBorn1": "July 3, 1946",
+  "personDied1": "February 5, 2026",
+  "personName2": "Gloria Marie Rhodes",
+  "personBorn2": "January 16, 1945",
+  "personDied2": "February 8, 2026",
+
+  "heroQuote": "They lived as one, and in the end, not even death could part them for long.",
+
+  "heroPhoto": {
+    "src": "photos/jerry-and-gloria.jpg",
+    "alt": "Jerry and Gloria Rhodes together"
+  },
+
+  "storyTitle": "Their Story",
+  "storyParagraphs": [
+    "The night they met, Gloria had dates lined up with a few different guys. Jerry was the first one to show up — so he got to take her out. They were together ever since.",
+    "What started that night became a 62-year love story that spanned more states than most people ever visit. Jerry and Gloria Rhodes were always on the move — from Maine to California, Texas to Wisconsin, Arizona and everywhere in between — before finally settling in the small towns of North Florida. They were the kind of people who fed their neighbors — literally — and left an indelible mark on everyone they met.",
+    "They departed this world just three days apart — Jerry on February 5, 2026, and Gloria on February 8, 2026 — a testament to a bond so deep that even in passing, they couldn't bear to be separated."
+  ],
+
+  "timelineTitle": "A Life Together",
+  "timelineItems": [
+    { "year": "January 16, 1945", "text": "Gloria Marie Allen was born in Fruitfield, Texas." },
+    { "year": "July 3, 1946", "text": "Jerry Dane Rhodes was born in Augusta, Maine." },
+    { "year": "August 23, 1963", "text": "Jerry and Gloria were married. She was 18, he was 17 — young and in love. It was the beginning of a partnership that would last over 62 years." },
+    { "year": "The Journey", "text": "Jerry and Gloria's life together took them across the country — from Pelican Lake, Wisconsin, to San Diego, California, Benson, Arizona, Dallas and Mesquite, Texas, and countless places in between before finally settling in North Florida. They were always on the move, but wherever they landed, they made it home. In Benson, Arizona, the family made the local paper when newborn Michelle weighed exactly the same as a roast in a contest — the kind of small-town moment that made for a lifetime of laughs." },
+    { "year": "Family", "text": "Together they raised five children — Karen, Kimberly, Cindy, Michelle, and Michael — building a home filled with love wherever life took them." },
+    { "year": "1980", "text": "Jerry built the family home in Fort White — out of eight old chicken incubators. When he first told the family, nobody believed him. The Lake City Reporter ran a feature on it." },
+    { "year": "1983", "text": "Jerry served as a city councilman, volunteering to distribute surplus goods and serving his community in local government." },
+    { "year": "Rhodes Real Pit Bar-B-Que", "text": "Together they opened Rhodes Real Pit Bar-B-Que — with locations in Mayo, Lake Butler, and Fort White. Real pit barbecue, cooked the way it should be. The restaurants became community gathering places where everyone was welcome." },
+    { "year": "Early 2000s", "text": "Their son Michael passed away — a loss that stayed with the family forever." },
+    { "year": "August 23, 2023", "text": "Jerry and Gloria celebrated their 60th wedding anniversary — six decades of love, laughter, and life together." },
+    { "year": "February 5, 2026", "text": "Jerry passed away peacefully, surrounded by the love of his family." },
+    { "year": "February 8, 2026", "text": "Gloria followed just three days later — reunited with Jerry." }
+  ],
+
+  "newsArticles": [
+    {
+      "title": "🏠 The Chicken Incubator House",
+      "source": "Lake City Reporter — May 29, 1980",
+      "url": "https://ufdc.ufl.edu/search/?q=%22Jerry+Rhodes%22+%22chicken+incubators%22&t=newspaper",
+      "description": "\"When Jerry Rhodes first told his family he was going to build their home out of eight old chicken incubators...\" — A feature article about Jerry's ingenuity, building the family home in Fort White from repurposed chicken incubators. The kind of resourcefulness that defined him."
+    },
+    {
+      "title": "🏛️ Serving the Community",
+      "source": "Lake City Reporter — January 11, 1983",
+      "url": "https://ufdc.ufl.edu/UF00028308/06899?search=%22jerry+rhodes%22",
+      "description": "\"Mayor McGrath and Councilman Jerry Rhodes said they would volunteer to distribute the surplus products\" — Jerry served as a city councilman, giving back to the community he loved."
+    },
+    {
+      "title": "🏛️ Running for Office",
+      "source": "Lake City Reporter — August 6, 1985",
+      "url": "https://ufdc.ufl.edu/search/?q=%22Jerry+Rhodes%22+qualified+deadline&t=newspaper",
+      "description": "\"An opponent, Jerry Rhodes, qualified 30 minutes before deadline\" — Jerry stepping up to run in a local election, always willing to serve."
+    },
+    {
+      "title": "💒 Rhodes–O'Sullivan Wedding",
+      "source": "Lake City Reporter — November 4, 1983",
+      "url": "https://ufdc.ufl.edu/UF00028308/07112?search=rhodes+o%27sullivan",
+      "description": "Bridal announcement for one of the Rhodes daughters, with Jerry and Gloria named as proud parents."
+    },
+    {
+      "title": "💒 Rhodes–Foster Wedding",
+      "source": "Lake City Reporter — November 11, 1998",
+      "url": "https://ufdc.ufl.edu/search/?q=%22Michelle+Renee+Rhodes%22+Foster&t=newspaper",
+      "description": "\"Michelle Renee Rhodes and Scott Foster\" — Michelle's wedding announcement, with Jerry and Gloria celebrating another daughter's new chapter."
+    },
+    {
+      "title": "🍖 BBQ Grand Opening",
+      "source": "Mayo Free Press — February 3, 2011",
+      "url": "https://ufdc.ufl.edu/search/?q=%22Rhodes+Real+Pit%22+%22opened+their+doors%22&t=newspaper",
+      "description": "\"Rhodes Real Pit BBQ opened their doors right around the holidays, offering an all-you-can-eat buffet\" — The Mayo location opens, bringing real pit barbecue to Lafayette County."
+    },
+    {
+      "title": "🍖 Help Wanted",
+      "source": "Lake City Reporter — August 5, 1997",
+      "url": "https://ufdc.ufl.edu/search/?q=%22Rhodes+Real+Pit%22+294-3643&t=newspaper",
+      "description": "\"Apply at Rhodes Real Pit BBQ in Mayo Florida. 294-3643\" — Business was good enough to need more hands."
+    }
+  ],
+
+  "newsIntro": "Jerry and Gloria weren't just part of their communities — they made the papers. These articles, discovered in the University of Florida Digital Newspaper Library, paint a picture of a family deeply woven into the fabric of North Florida life.",
+  "newsFootnote": "Articles sourced from the <a href=\"https://ufdc.ufl.edu/\" style=\"color: #c4a478;\">University of Florida Digital Newspaper Library</a>",
+
+  "businesses": [
+    {
+      "name": "Rhodes Real Pit Bar-B-Que",
+      "location": "📍 163 W Main Street, Mayo, FL 32066",
+      "description": "The original location in Lafayette County, where it all began. A humble eatery specializing in authentic, traditional Southern barbecue."
+    },
+    {
+      "name": "Rhodes Real Pit Bar-B-Que",
+      "location": "📍 315 N Lake Avenue, Lake Butler, FL 32054",
+      "description": "The Lake Butler location in Union County's seat, bringing the same real pit flavor to the community."
+    },
+    {
+      "name": "Rhodes Real Pit Bar-B-Que",
+      "location": "📍 Fort White, FL",
+      "description": "A brief but memorable chapter — Jerry and Gloria brought their signature barbecue to the Fort White community as well."
+    }
+  ],
+
+  "businessesSectionTitle": "Rhodes Real Pit Bar-B-Que",
+  "businessesIntro": "Jerry and Gloria Rhodes didn't just run restaurants — they built gathering places. Rhodes Real Pit Bar-B-Que was the real deal: slow-smoked, pit-cooked barbecue in the heart of small-town Florida. The kind of place where the whole county knew your name and the food tasted like home.",
+
+  "photos": [
+    { "src": "photos/jerry-and-gloria.jpg", "alt": "Jerry and Gloria Rhodes" },
+    { "src": "photos/jerry-and-gloria-young.jpg", "alt": "Jerry and Gloria Rhodes — the early years" },
+    { "src": "photos/family-autumn.jpg", "alt": "Family photo in autumn" }
+  ],
+
+  "familyMembers": ["Karen", "Kimberly", "Cindy", "Michelle", "Michael"],
+  "familyIntro": "Jerry and Gloria's greatest legacy is their family. Together they raised five children, filling their home with love, laughter, and the smell of barbecue.",
+  "familyNote": "Their son Michael preceded them in passing in the early 2000s.",
+
+  "closingQuote": "Some people leave footprints so deep in our hearts that we are forever changed.",
+
+  "formEmail": "codeClaude08@gmail.com",
+  "shareMemoryText": "If Jerry and Gloria touched your life, we'd love to hear from you. Share a story, a memory, or a photo — everything helps us celebrate the lives they lived.",
+  "relationshipLabel": "How did you know Jerry & Gloria?",
+
+  "funeralHomeName": "Daniels Funeral Home",
+  "funeralHomeLogo": "",
+  "funeralHomePhone": "(386) 362-4333",
+  "funeralHomeWebsite": "https://www.danielsfuneralhome.com",
+  "funeralHomeTagline": "Serving families with compassion since 1950"
+}

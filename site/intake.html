@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Memorial Page — GentlyTold</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0a0a;
+            color: #e8e0d8;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: #c4a478; text-decoration: none; }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(196, 164, 120, 0.08);
+        }
+
+        .header-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #c4a478;
+        }
+
+        .header-back {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #a89880;
+        }
+
+        /* Progress */
+        .progress-bar {
+            max-width: 700px;
+            margin: 3rem auto 1rem;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: calc(2rem + 18px);
+            right: calc(2rem + 18px);
+            height: 1px;
+            background: rgba(196, 164, 120, 0.2);
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-step .circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 164, 120, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: #7a7068;
+            background: #0a0a0a;
+            transition: all 0.3s;
+        }
+
+        .progress-step.active .circle {
+            border-color: #c4a478;
+            color: #c4a478;
+            background: rgba(196, 164, 120, 0.1);
+        }
+
+        .progress-step.completed .circle {
+            border-color: #c4a478;
+            color: #0a0a0a;
+            background: #c4a478;
+        }
+
+        .progress-step .step-label {
+            font-size: 0.75rem;
+            color: #5a5450;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .progress-step.active .step-label {
+            color: #c4a478;
+        }
+
+        .progress-step.completed .step-label {
+            color: #a89880;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 700px;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #f5efe8;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-subtitle {
+            text-align: center;
+            font-weight: 300;
+            color: #a89880;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: #c4a478;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group .hint {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #7a7068;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="url"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            border-radius: 6px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #c4a478;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #5a5450;
+        }
+
+        .form-group select option {
+            background: #1a1510;
+            color: #e8e0d8;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group.invalid input,
+        .form-group.invalid textarea,
+        .form-group.invalid select {
+            border-color: #b45050;
+        }
+
+        .form-group .error-msg {
+            font-size: 0.8rem;
+            color: #b45050;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-group.invalid .error-msg {
+            display: block;
+        }
+
+        /* Toggle */
+        .toggle-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-option {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #7a7068;
+        }
+
+        .toggle-option.active {
+            border-color: #c4a478;
+            color: #c4a478;
+            background: rgba(196, 164, 120, 0.1);
+        }
+
+        .toggle-option:hover {
+            border-color: rgba(196, 164, 120, 0.4);
+        }
+
+        /* Couple section */
+        .couple-fields {
+            display: none;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(196, 164, 120, 0.1);
+            border-radius: 8px;
+            background: rgba(196, 164, 120, 0.02);
+        }
+
+        .couple-fields.visible { display: block; }
+
+        .couple-fields h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #c4a478;
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline builder */
+        .timeline-entry {
+            display: grid;
+            grid-template-columns: 150px 1fr 40px;
+            gap: 0.75rem;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-entry input,
+        .timeline-entry textarea {
+            padding: 0.6rem 0.8rem;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 4px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .timeline-entry textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .remove-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(180, 80, 80, 0.3);
+            background: rgba(180, 80, 80, 0.1);
+            border-radius: 4px;
+            color: #b45050;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(196, 164, 120, 0.3);
+            background: rgba(196, 164, 120, 0.08);
+            border-radius: 4px;
+            color: #c4a478;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .add-btn:hover {
+            background: rgba(196, 164, 120, 0.15);
+        }
+
+        /* Family members */
+        .family-entry {
+            display: grid;
+            grid-template-columns: 1fr 40px;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .family-entry input {
+            padding: 0.6rem 0.8rem;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 4px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        /* Photo Upload */
+        .upload-zone {
+            border: 2px dashed rgba(196, 164, 120, 0.25);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: #c4a478;
+            background: rgba(196, 164, 120, 0.05);
+        }
+
+        .upload-zone .upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-zone h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #f5efe8;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-zone p {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #7a7068;
+        }
+
+        .upload-zone input[type="file"] {
+            display: none;
+        }
+
+        .photo-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-preview {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-preview .remove-photo {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(180, 80, 80, 0.5);
+            border-radius: 50%;
+            color: #b45050;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Review */
+        .review-section {
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.12);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #c4a478;
+            margin-bottom: 1rem;
+        }
+
+        .review-field {
+            margin-bottom: 0.75rem;
+        }
+
+        .review-field .rf-label {
+            font-size: 0.8rem;
+            color: #7a7068;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        .review-field .rf-value {
+            font-weight: 300;
+            color: #d4ccc4;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(196, 164, 120, 0.3);
+            color: #a89880;
+        }
+
+        .btn-back:hover {
+            border-color: #c4a478;
+            color: #c4a478;
+        }
+
+        .btn-next {
+            background: #c4a478;
+            color: #0a0a0a;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .btn-next:hover {
+            background: #d4b488;
+        }
+
+        .btn-submit {
+            background: #c4a478;
+            color: #0a0a0a;
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-submit:hover {
+            background: #d4b488;
+        }
+
+        /* Success */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .success-message.visible { display: block; }
+
+        .success-message .check {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-message h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #f5efe8;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            font-weight: 300;
+            color: #a89880;
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .timeline-entry { grid-template-columns: 1fr; }
+            .timeline-entry .remove-btn { justify-self: end; }
+            .toggle-group { flex-direction: column; }
+            .form-buttons { flex-direction: column-reverse; }
+            .btn-next { max-width: 100%; }
+            .progress-step .step-label { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="header-brand">GentlyTold</a>
+        <a href="index.html" class="header-back">← Back to home</a>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+        <div class="progress-step active" data-step="1">
+            <div class="circle">1</div>
+            <div class="step-label">Basic Info</div>
+        </div>
+        <div class="progress-step" data-step="2">
+            <div class="circle">2</div>
+            <div class="step-label">Life Story</div>
+        </div>
+        <div class="progress-step" data-step="3">
+            <div class="circle">3</div>
+            <div class="step-label">Photos & Branding</div>
+        </div>
+        <div class="progress-step" data-step="4">
+            <div class="circle">4</div>
+            <div class="step-label">Review</div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-container" id="formContainer">
+
+        <!-- Step 1: Basic Info -->
+        <div class="step-content active" data-step="1">
+            <h2 class="step-title">Basic Information</h2>
+            <p class="step-subtitle">Tell us about the person (or couple) being honored.</p>
+
+            <label class="form-group" style="font-family: 'Playfair Display', serif; color: #c4a478; font-size: 0.95rem; margin-bottom: 0.75rem;">Memorial Type</label>
+            <div class="toggle-group">
+                <div class="toggle-option active" data-value="individual" onclick="setType('individual')">Individual</div>
+                <div class="toggle-option" data-value="couple" onclick="setType('couple')">Couple</div>
+            </div>
+
+            <div class="form-group">
+                <label>Full Name <span id="person1Label"></span></label>
+                <input type="text" id="personName1" placeholder="e.g. John David Smith" required>
+                <div class="error-msg">Please enter the full name</div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="text" id="personBorn1" placeholder="e.g. March 15, 1940">
+                    <div class="error-msg">Please enter the date of birth</div>
+                </div>
+                <div class="form-group">
+                    <label>Date of Passing</label>
+                    <input type="text" id="personDied1" placeholder="e.g. January 10, 2026">
+                    <div class="error-msg">Please enter the date of passing</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" id="location1" placeholder="e.g. Fort White, Florida">
+            </div>
+
+            <!-- Couple Fields -->
+            <div class="couple-fields" id="coupleFields">
+                <h3>Second Person</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="personName2" placeholder="e.g. Mary Jane Smith">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="text" id="personBorn2" placeholder="e.g. June 22, 1942">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Passing</label>
+                        <input type="text" id="personDied2" placeholder="e.g. January 13, 2026">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Hero Quote (optional)</label>
+                <div class="hint">A short quote or phrase that captures their essence</div>
+                <input type="text" id="heroQuote" placeholder="e.g. They lived as one, and in the end, not even death could part them.">
+            </div>
+
+            <div class="form-buttons">
+                <div></div>
+                <button class="btn btn-next" onclick="nextStep(2)">Continue →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Life Story -->
+        <div class="step-content" data-step="2">
+            <h2 class="step-title">Life Story</h2>
+            <p class="step-subtitle">Share their story. Paste an existing obituary or write something new.</p>
+
+            <div class="form-group">
+                <label>Their Story</label>
+                <div class="hint">Write the life story, or paste an existing obituary. We'll format it beautifully.</div>
+                <textarea id="storyText" rows="8" placeholder="The night they met, Gloria had dates lined up with a few different guys. Jerry was the first one to show up — so he got to take her out..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Timeline Events</label>
+                <div class="hint">Key moments in their life. Add as many as you like.</div>
+                <div id="timelineEntries">
+                    <div class="timeline-entry">
+                        <input type="text" placeholder="Year / Label" class="tl-year">
+                        <textarea placeholder="What happened..." class="tl-text"></textarea>
+                        <button class="remove-btn" onclick="removeEntry(this, 'timelineEntries')" title="Remove">×</button>
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addTimeline()">+ Add Event</button>
+            </div>
+
+            <div class="form-group">
+                <label>Family Members</label>
+                <div class="hint">Children, grandchildren, or other close family to list.</div>
+                <div id="familyEntries">
+                    <div class="family-entry">
+                        <input type="text" placeholder="Name" class="fm-name">
+                        <button class="remove-btn" onclick="removeEntry(this, 'familyEntries')" title="Remove">×</button>
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addFamily()">+ Add Family Member</button>
+            </div>
+
+            <div class="form-group">
+                <label>Family Note (optional)</label>
+                <input type="text" id="familyNote" placeholder="e.g. Their son Michael preceded them in passing.">
+            </div>
+
+            <div class="form-group">
+                <label>Closing Quote (optional)</label>
+                <input type="text" id="closingQuote" placeholder="e.g. Some people leave footprints so deep in our hearts...">
+            </div>
+
+            <div class="form-buttons">
+                <button class="btn btn-back" onclick="prevStep(1)">← Back</button>
+                <button class="btn btn-next" onclick="nextStep(3)">Continue →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Photos & Branding -->
+        <div class="step-content" data-step="3">
+            <h2 class="step-title">Photos & Branding</h2>
+            <p class="step-subtitle">Upload photos and add your funeral home details.</p>
+
+            <div class="form-group">
+                <label>Photos</label>
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📷</div>
+                    <h3>Drag & drop photos here</h3>
+                    <p>or click to browse · JPG, PNG, WEBP</p>
+                    <input type="file" id="photoInput" multiple accept="image/*">
+                </div>
+                <div class="photo-preview-grid" id="photoPreview"></div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(196, 164, 120, 0.1); padding-top: 2rem; margin-top: 1rem;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #c4a478; font-size: 1.15rem; margin-bottom: 1.5rem;">Funeral Home Branding</h3>
+
+                <div class="form-group">
+                    <label>Funeral Home Name</label>
+                    <input type="text" id="funeralHomeName" placeholder="e.g. Daniels Funeral Home">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="funeralHomePhone" placeholder="(386) 362-4333">
+                    </div>
+                    <div class="form-group">
+                        <label>Website</label>
+                        <input type="url" id="funeralHomeWebsite" placeholder="https://www.yourfuneralhome.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Tagline (optional)</label>
+                    <input type="text" id="funeralHomeTagline" placeholder="e.g. Serving families with compassion since 1950">
+                </div>
+
+                <div class="form-group">
+                    <label>Logo Upload (optional)</label>
+                    <div class="upload-zone" id="logoZone" style="padding: 1.5rem;">
+                        <p style="color: #7a7068;">Click to upload logo · PNG or SVG preferred</p>
+                        <input type="file" id="logoInput" accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Contact Email</label>
+                <div class="hint">Where should memory submissions from visitors be sent?</div>
+                <input type="email" id="formEmail" placeholder="you@funeralhome.com">
+            </div>
+
+            <div class="form-buttons">
+                <button class="btn btn-back" onclick="prevStep(2)">← Back</button>
+                <button class="btn btn-next" onclick="nextStep(4)">Review →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="step-content" data-step="4">
+            <h2 class="step-title">Review & Submit</h2>
+            <p class="step-subtitle">Make sure everything looks right before submitting.</p>
+
+            <div id="reviewContent"></div>
+
+            <div style="margin-top: 2rem;">
+                <button class="btn btn-submit" onclick="submitForm()">Submit Memorial Request</button>
+            </div>
+
+            <div class="form-buttons" style="margin-top: 1rem;">
+                <button class="btn btn-back" onclick="prevStep(3)">← Back to edit</button>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="check">✦</div>
+        <h2>Memorial Request Submitted</h2>
+        <p>
+            Thank you. We've received everything we need to create a beautiful memorial page.
+            You'll receive a preview within 24 hours at the email provided.
+        </p>
+        <p style="margin-top: 2rem;">
+            <a href="index.html" style="color: #c4a478;">← Return to GentlyTold</a>
+        </p>
+    </div>
+
+    <script>
+        // --- State ---
+        let currentStep = 1;
+        let memorialType = 'individual';
+        let uploadedPhotos = [];
+        let uploadedLogo = null;
+
+        // --- Type Toggle ---
+        function setType(type) {
+            memorialType = type;
+            document.querySelectorAll('.toggle-option').forEach(el => {
+                el.classList.toggle('active', el.dataset.value === type);
+            });
+            document.getElementById('coupleFields').classList.toggle('visible', type === 'couple');
+            document.getElementById('person1Label').textContent = type === 'couple' ? '(Person 1)' : '';
+        }
+
+        // --- Navigation ---
+        function nextStep(step) {
+            if (!validateStep(currentStep)) return;
+            if (step === 4) buildReview();
+            goToStep(step);
+        }
+
+        function prevStep(step) {
+            goToStep(step);
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            document.querySelectorAll('.step-content').forEach(el => {
+                el.classList.toggle('active', parseInt(el.dataset.step) === step);
+            });
+            document.querySelectorAll('.progress-step').forEach(el => {
+                const s = parseInt(el.dataset.step);
+                el.classList.toggle('active', s === step);
+                el.classList.toggle('completed', s < step);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Validation ---
+        function validateStep(step) {
+            let valid = true;
+            if (step === 1) {
+                valid = validateField('personName1') && valid;
+            }
+            return valid;
+        }
+
+        function validateField(id) {
+            const el = document.getElementById(id);
+            const group = el.closest('.form-group');
+            if (!el.value.trim()) {
+                group.classList.add('invalid');
+                return false;
+            }
+            group.classList.remove('invalid');
+            return true;
+        }
+
+        // Clear validation on input
+        document.addEventListener('input', e => {
+            const group = e.target.closest('.form-group');
+            if (group) group.classList.remove('invalid');
+        });
+
+        // --- Dynamic Fields ---
+        function addTimeline() {
+            const container = document.getElementById('timelineEntries');
+            const entry = document.createElement('div');
+            entry.className = 'timeline-entry';
+            entry.innerHTML = `
+                <input type="text" placeholder="Year / Label" class="tl-year">
+                <textarea placeholder="What happened..." class="tl-text"></textarea>
+                <button class="remove-btn" onclick="removeEntry(this, 'timelineEntries')" title="Remove">×</button>
+            `;
+            container.appendChild(entry);
+        }
+
+        function addFamily() {
+            const container = document.getElementById('familyEntries');
+            const entry = document.createElement('div');
+            entry.className = 'family-entry';
+            entry.innerHTML = `
+                <input type="text" placeholder="Name" class="fm-name">
+                <button class="remove-btn" onclick="removeEntry(this, 'familyEntries')" title="Remove">×</button>
+            `;
+            container.appendChild(entry);
+        }
+
+        function removeEntry(btn, containerId) {
+            const container = document.getElementById(containerId);
+            if (container.children.length > 1) {
+                btn.closest('.timeline-entry, .family-entry').remove();
+            }
+        }
+
+        // --- Photo Upload ---
+        const uploadZone = document.getElementById('uploadZone');
+        const photoInput = document.getElementById('photoInput');
+        const logoZone = document.getElementById('logoZone');
+        const logoInput = document.getElementById('logoInput');
+
+        uploadZone.addEventListener('click', () => photoInput.click());
+        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handlePhotos(e.dataTransfer.files);
+        });
+        photoInput.addEventListener('change', e => handlePhotos(e.target.files));
+
+        logoZone.addEventListener('click', () => logoInput.click());
+        logoInput.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                uploadedLogo = e.target.files[0];
+                logoZone.querySelector('p').textContent = '✓ ' + uploadedLogo.name;
+                logoZone.querySelector('p').style.color = '#c4a478';
+            }
+        });
+
+        function handlePhotos(files) {
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                uploadedPhotos.push(file);
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const grid = document.getElementById('photoPreview');
+                    const div = document.createElement('div');
+                    div.className = 'photo-preview';
+                    const idx = uploadedPhotos.length - 1;
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Upload">
+                        <button class="remove-photo" onclick="removePhoto(${idx}, this)" title="Remove">×</button>
+                    `;
+                    grid.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removePhoto(idx, btn) {
+            uploadedPhotos[idx] = null;
+            btn.closest('.photo-preview').remove();
+        }
+
+        // --- Build Review ---
+        function buildReview() {
+            const val = id => (document.getElementById(id)?.value || '').trim();
+            let html = '';
+
+            // Basic info
+            html += '<div class="review-section"><h3>Basic Information</h3>';
+            html += reviewField('Type', memorialType === 'couple' ? 'Couple' : 'Individual');
+            html += reviewField('Name', val('personName1'));
+            html += reviewField('Born — Passed', val('personBorn1') + ' — ' + val('personDied1'));
+            if (memorialType === 'couple') {
+                html += reviewField('Name (2)', val('personName2'));
+                html += reviewField('Born — Passed (2)', val('personBorn2') + ' — ' + val('personDied2'));
+            }
+            if (val('heroQuote')) html += reviewField('Hero Quote', val('heroQuote'));
+            html += '</div>';
+
+            // Story
+            html += '<div class="review-section"><h3>Life Story</h3>';
+            if (val('storyText')) html += reviewField('Story', val('storyText').substring(0, 200) + (val('storyText').length > 200 ? '...' : ''));
+
+            const tlEntries = document.querySelectorAll('#timelineEntries .timeline-entry');
+            let tlCount = 0;
+            tlEntries.forEach(entry => {
+                if (entry.querySelector('.tl-year').value.trim()) tlCount++;
+            });
+            if (tlCount > 0) html += reviewField('Timeline Events', tlCount + ' events');
+
+            const fmEntries = document.querySelectorAll('#familyEntries .family-entry');
+            const familyNames = [];
+            fmEntries.forEach(entry => {
+                const n = entry.querySelector('.fm-name').value.trim();
+                if (n) familyNames.push(n);
+            });
+            if (familyNames.length > 0) html += reviewField('Family', familyNames.join(', '));
+            if (val('familyNote')) html += reviewField('Family Note', val('familyNote'));
+            if (val('closingQuote')) html += reviewField('Closing Quote', val('closingQuote'));
+            html += '</div>';
+
+            // Photos & Branding
+            html += '<div class="review-section"><h3>Photos & Branding</h3>';
+            const photoCount = uploadedPhotos.filter(p => p !== null).length;
+            html += reviewField('Photos', photoCount + ' photo(s) uploaded');
+            if (val('funeralHomeName')) html += reviewField('Funeral Home', val('funeralHomeName'));
+            if (val('funeralHomePhone')) html += reviewField('Phone', val('funeralHomePhone'));
+            if (val('funeralHomeWebsite')) html += reviewField('Website', val('funeralHomeWebsite'));
+            if (val('formEmail')) html += reviewField('Contact Email', val('formEmail'));
+            html += '</div>';
+
+            document.getElementById('reviewContent').innerHTML = html;
+        }
+
+        function reviewField(label, value) {
+            if (!value) return '';
+            return `<div class="review-field"><div class="rf-label">${label}</div><div class="rf-value">${escHtml(value)}</div></div>`;
+        }
+
+        function escHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // --- Submit ---
+        function submitForm() {
+            const val = id => (document.getElementById(id)?.value || '').trim();
+            
+            // Gather timeline
+            const timelineItems = [];
+            document.querySelectorAll('#timelineEntries .timeline-entry').forEach(entry => {
+                const year = entry.querySelector('.tl-year').value.trim();
+                const text = entry.querySelector('.tl-text').value.trim();
+                if (year || text) timelineItems.push({ year, text });
+            });
+
+            // Gather family
+            const familyMembers = [];
+            document.querySelectorAll('#familyEntries .family-entry').forEach(entry => {
+                const name = entry.querySelector('.fm-name').value.trim();
+                if (name) familyMembers.push(name);
+            });
+
+            const data = {
+                isCouple: memorialType === 'couple',
+                personName1: val('personName1'),
+                personBorn1: val('personBorn1'),
+                personDied1: val('personDied1'),
+                location1: val('location1'),
+                personName2: memorialType === 'couple' ? val('personName2') : '',
+                personBorn2: memorialType === 'couple' ? val('personBorn2') : '',
+                personDied2: memorialType === 'couple' ? val('personDied2') : '',
+                heroQuote: val('heroQuote'),
+                storyText: val('storyText'),
+                timelineItems,
+                familyMembers,
+                familyNote: val('familyNote'),
+                closingQuote: val('closingQuote'),
+                funeralHomeName: val('funeralHomeName'),
+                funeralHomePhone: val('funeralHomePhone'),
+                funeralHomeWebsite: val('funeralHomeWebsite'),
+                funeralHomeTagline: val('funeralHomeTagline'),
+                formEmail: val('formEmail'),
+                photoCount: uploadedPhotos.filter(p => p !== null).length,
+                hasLogo: !!uploadedLogo,
+                submittedAt: new Date().toISOString()
+            };
+
+            console.log('Memorial submission:', JSON.stringify(data, null, 2));
+
+            // Show success
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('progressBar').style.display = 'none';
+            document.getElementById('successMessage').classList.add('visible');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

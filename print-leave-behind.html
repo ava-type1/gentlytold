@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GentlyTold — Funeral Home Partner Sheet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @page { size: letter; margin: 0.6in; }
+        @media print { body { padding: 0; } }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #1a1510;
+            max-width: 7in;
+            margin: 0 auto;
+            padding: 0.6in;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #c4a478;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1510;
+            margin-bottom: 0.2rem;
+        }
+
+        .header .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: #8a7a68;
+        }
+
+        .headline {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #1a1510;
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .subheadline {
+            text-align: center;
+            font-weight: 300;
+            font-size: 1rem;
+            color: #5a5048;
+            margin-bottom: 1.2rem;
+        }
+
+        .money-box {
+            background: #1a1510;
+            color: #f5efe8;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .money-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #c4a478;
+            margin-bottom: 0.6rem;
+        }
+
+        .money-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            font-weight: 300;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .money-row:last-child {
+            border-bottom: none;
+            padding-top: 0.5rem;
+            font-weight: 700;
+            color: #c4a478;
+            font-size: 1.05rem;
+        }
+
+        .money-row .label { color: #d4ccc4; }
+        .money-row .amount { color: #f5efe8; }
+        .money-row:last-child .label { color: #c4a478; }
+
+        .ad-section {
+            border: 2px solid #c4a478;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .ad-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .ad-section p {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #3a3530;
+            line-height: 1.6;
+            margin-bottom: 0.4rem;
+        }
+
+        .ad-section .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .ad-section .stat .num {
+            font-weight: 700;
+            color: #1a1510;
+        }
+
+        .highlight {
+            background: #faf6f0;
+            border-left: 3px solid #c4a478;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #3a3530;
+            line-height: 1.6;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .col-card {
+            border: 1px solid #c4a478;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+        }
+
+        .col-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .col-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .col-card li {
+            font-weight: 300;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            padding-left: 1rem;
+            position: relative;
+            color: #3a3530;
+        }
+
+        .col-card li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #c4a478;
+            font-size: 0.6rem;
+            top: 0.2rem;
+        }
+
+        .no-catch {
+            text-align: center;
+            padding: 0.6rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1a1510;
+            margin-bottom: 1rem;
+        }
+
+        .qr-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #c4a478;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .qr-box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #c4a478;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #8a7a68;
+            text-align: center;
+        }
+
+        .qr-text h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .qr-text p {
+            font-weight: 300;
+            font-size: 0.82rem;
+            color: #5a5048;
+            line-height: 1.4;
+        }
+
+        .contact {
+            text-align: center;
+            padding-top: 0.8rem;
+            border-top: 2px solid #c4a478;
+        }
+
+        .contact .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+        }
+
+        .contact .details {
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: #5a5048;
+            margin-top: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>GentlyTold</h1>
+        <div class="tagline">A life, gently told.</div>
+    </div>
+
+    <div class="headline">Get paid to advertise your funeral home<br>to every family in the community — forever.</div>
+    <div class="subheadline">Beautiful memorial websites with your brand on every page.</div>
+
+    <!-- THE MONEY -->
+    <div class="money-box">
+        <h3>💰 The Math — Per Memorial Page</h3>
+        <div class="money-row">
+            <span class="label">You pay us</span>
+            <span class="amount">$50</span>
+        </div>
+        <div class="money-row">
+            <span class="label">You charge the family</span>
+            <span class="amount">$199 (suggested)</span>
+        </div>
+        <div class="money-row">
+            <span class="label">Your profit — per page</span>
+            <span class="amount">$149</span>
+        </div>
+    </div>
+
+    <!-- THE ADVERTISING ANGLE -->
+    <div class="ad-section">
+        <h3>📢 The Real Value: Permanent Advertising You Get Paid For</h3>
+        <p>Your funeral home's name, phone number, and website appear at the bottom of every memorial page. When families share that link — and they will — here's what happens:</p>
+        <div class="stat">
+            <span>Average family shares with</span>
+            <span class="num">30–50 people</span>
+        </div>
+        <div class="stat">
+            <span>Those people see YOUR brand</span>
+            <span class="num">Every time</span>
+        </div>
+        <div class="stat">
+            <span>Page stays live</span>
+            <span class="num">Forever</span>
+        </div>
+        <div class="stat">
+            <span>QR on headstone = scans by</span>
+            <span class="num">Strangers for decades</span>
+        </div>
+        <p style="margin-top: 0.5rem; text-align: center; font-weight: 400;">
+            <strong>They don't associate the page with us. They associate it with you.</strong><br>
+            "Wow, look what Gary's Funeral Home did for the family" — that's what people think.
+        </p>
+    </div>
+
+    <div class="highlight">
+        Every person who scans that QR code on the headstone scrolls to the bottom and sees <strong>your name</strong>. They think: "This must have cost thousands." They remember you. When it's their turn to plan a funeral, they call <strong>you</strong>. And you made $149 placing that ad.
+    </div>
+
+    <div class="two-col">
+        <div class="col-card">
+            <h4>What's Included ($50)</h4>
+            <ul>
+                <li>AI-crafted life narrative</li>
+                <li>Photo gallery</li>
+                <li>Interactive life timeline</li>
+                <li>"Share a Memory" form</li>
+                <li>Mobile-friendly design</li>
+                <li>QR code for headstone</li>
+                <li>Your branding on every page</li>
+                <li>First year hosting included</li>
+            </ul>
+        </div>
+        <div class="col-card">
+            <h4>What You DON'T Pay</h4>
+            <ul>
+                <li>No monthly subscription</li>
+                <li>No setup fee</li>
+                <li>No contract or commitment</li>
+                <li>No minimum order</li>
+                <li>No tech skills needed</li>
+                <li>No extra charge for your branding</li>
+                <li>No hidden fees — ever</li>
+                <li>Only pay when you sell one</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="no-catch">You're losing money NOT doing this. $149 profit + free advertising on every page.</div>
+
+    <div class="qr-row">
+        <div class="qr-box">[QR CODE]<br>Print here</div>
+        <div class="qr-text">
+            <h4>📱 Scan to See a Live Example</h4>
+            <p>This is a real memorial page built for a North Florida family. Scroll to the bottom to see exactly where your branding goes. This is what your families would receive.</p>
+        </div>
+    </div>
+
+    <div class="contact">
+        <div class="name">Kameron Martin &nbsp;·&nbsp; GentlyTold</div>
+        <div class="details">📞 [your phone] &nbsp;&nbsp;·&nbsp;&nbsp; ✉️ [your email] &nbsp;&nbsp;·&nbsp;&nbsp; 🌐 gentlytold.com</div>
+    </div>
+
+</body>
+</html>

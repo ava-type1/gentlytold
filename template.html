@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Loving Memory — {{pageTitle}}</title>
+    <meta name="description" content="A memorial tribute to {{pageTitle}}. A life, gently told.">
+    <meta property="og:title" content="In Loving Memory — {{pageTitle}}">
+    <meta property="og:description" content="{{heroQuote}}">
+    <meta property="og:type" content="website">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0a0a;
+            color: #e8e0d8;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(196, 164, 120, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: #c4a478;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            color: #f5efe8;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 .ampersand {
+            font-style: italic;
+            color: #c4a478;
+            font-size: 0.8em;
+        }
+
+        .dates {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #a89880;
+            letter-spacing: 0.15rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .in-memoriam {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #c4a478;
+            margin-bottom: 3rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.4;
+            font-size: 1.5rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Photo placeholder */
+        .photo-frame {
+            width: 280px;
+            height: 320px;
+            border: 1px solid rgba(196, 164, 120, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            background: rgba(196, 164, 120, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .photo-placeholder {
+            color: #a89880;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Sections */
+        .section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #f5efe8;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: #c4a478;
+            margin: 1rem auto 2.5rem;
+        }
+
+        .section p {
+            font-weight: 300;
+            line-height: 1.9;
+            font-size: 1.05rem;
+            color: #d4ccc4;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Life Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #c4a478, transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c4a478;
+        }
+
+        .timeline-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #c4a478;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-text {
+            font-weight: 300;
+            color: #d4ccc4;
+            line-height: 1.7;
+        }
+
+        /* Cards (restaurants, news, businesses) */
+        .card {
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.15);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #f5efe8;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .location {
+            color: #c4a478;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .card .location a {
+            color: #c4a478;
+        }
+
+        .card p {
+            font-weight: 300;
+            color: #d4ccc4;
+            line-height: 1.7;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            border: 1px solid rgba(196, 164, 120, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(196, 164, 120, 0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Quote */
+        .quote-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .quote-section blockquote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #c4a478;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Family */
+        .family-names {
+            text-align: center;
+            margin: 2rem 0;
+            line-height: 2.2;
+        }
+
+        .family-names p.names {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #f5efe8;
+        }
+
+        .family-names p.note {
+            font-style: italic;
+            color: #a89880;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Form */
+        .memory-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #c4a478;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            border-radius: 6px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus {
+            border-color: #c4a478;
+        }
+
+        .form-group input[type="text"]::placeholder,
+        .form-group input[type="email"]::placeholder,
+        .form-group textarea::placeholder {
+            color: #7a7068;
+        }
+
+        .form-group input[type="file"] {
+            color: #a89880;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="file"]::file-selector-button {
+            padding: 0.5rem 1rem;
+            background: rgba(196, 164, 120, 0.15);
+            border: 1px solid rgba(196, 164, 120, 0.3);
+            border-radius: 4px;
+            color: #c4a478;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            margin-right: 0.75rem;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(196, 164, 120, 0.15);
+            border: 1px solid rgba(196, 164, 120, 0.4);
+            border-radius: 6px;
+            color: #c4a478;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: rgba(196, 164, 120, 0.25);
+            border-color: #c4a478;
+        }
+
+        /* Funeral Home Branding Footer */
+        .funeral-home-branding {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.08);
+            background: rgba(196, 164, 120, 0.02);
+        }
+
+        .funeral-home-branding .prepared-by {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #7a7068;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .funeral-home-branding .fh-logo {
+            max-height: 50px;
+            margin-bottom: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .funeral-home-branding .fh-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #c4a478;
+            margin-bottom: 0.5rem;
+        }
+
+        .funeral-home-branding .fh-details {
+            font-weight: 300;
+            color: #7a7068;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .funeral-home-branding .fh-details a {
+            color: #a89880;
+            text-decoration: none;
+        }
+
+        .funeral-home-branding .fh-details a:hover {
+            color: #c4a478;
+        }
+
+        .funeral-home-branding .fh-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #a89880;
+            margin-top: 0.75rem;
+        }
+
+        /* Memorial Footer */
+        .memorial-footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.1);
+        }
+
+        .memorial-footer .ornament {
+            margin-bottom: 1rem;
+        }
+
+        .memorial-footer p {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 0.9rem;
+        }
+
+        .gently-told-credit {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            font-size: 0.75rem;
+            color: #4a4440;
+        }
+
+        .gently-told-credit a {
+            color: #5a5450;
+            text-decoration: none;
+        }
+
+        .gently-told-credit a:hover {
+            color: #c4a478;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .section { padding: 3rem 1.5rem; }
+            .photo-frame { width: 220px; height: 260px; }
+            .gallery { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="ornament">✦ ✦ ✦</div>
+        {{heroContent}}
+        <div class="scroll-hint">↓</div>
+    </section>
+
+    <!-- Their Story -->
+    <section class="section">
+        <h2>{{storyTitle}}</h2>
+        <div class="section-divider"></div>
+        {{storyParagraphsHTML}}
+    </section>
+
+    <!-- Life Timeline -->
+    <section class="section">
+        <h2>{{timelineTitle}}</h2>
+        <div class="section-divider"></div>
+        <div class="timeline">
+            {{timelineHTML}}
+        </div>
+    </section>
+
+    {{newsSection}}
+
+    {{businessesSection}}
+
+    <!-- Photo Gallery -->
+    <section class="section">
+        <h2>Memories</h2>
+        <div class="section-divider"></div>
+        <div class="gallery" id="gallery">
+            {{galleryHTML}}
+        </div>
+    </section>
+
+    <!-- Share a Memory -->
+    <section class="section">
+        <h2>Share a Memory</h2>
+        <div class="section-divider"></div>
+        <p style="text-align: center; margin-bottom: 2rem;">
+            {{shareMemoryText}}
+        </p>
+        <form action="https://formsubmit.co/{{formEmail}}" method="POST" enctype="multipart/form-data" class="memory-form">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="{{pageTitle}} Memorial — New Memory Shared">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+            
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="relationship">{{relationshipLabel}}</label>
+                <input type="text" id="relationship" name="relationship" placeholder="Family, friend, neighbor...">
+            </div>
+            <div class="form-group">
+                <label for="memory">Your Memory or Story</label>
+                <textarea id="memory" name="memory" rows="6" placeholder="Share a favorite memory, a funny story, or just what they meant to you..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="photo">Upload a Photo (optional)</label>
+                <input type="file" id="photo" name="attachment" accept="image/*">
+            </div>
+            <button type="submit" class="submit-btn">Share This Memory</button>
+        </form>
+    </section>
+
+    <!-- Closing Quote -->
+    <section class="quote-section">
+        <blockquote>
+            "{{closingQuote}}"
+        </blockquote>
+    </section>
+
+    <!-- Family -->
+    <section class="section">
+        <h2>Family</h2>
+        <div class="section-divider"></div>
+        <p>
+            {{familyIntro}}
+        </p>
+        <div class="family-names">
+            <p class="names">
+                {{familyNamesHTML}}
+            </p>
+            {{familyNoteHTML}}
+        </div>
+        <p>
+            Their love, values, and spirit live on through every generation they helped raise
+            and every life they touched.
+        </p>
+    </section>
+
+    <!-- Memorial Footer -->
+    <footer class="memorial-footer">
+        <div class="ornament">✦</div>
+        <p>In Loving Memory of {{pageTitle}}</p>
+        <p style="margin-top: 0.5rem;">Forever in our hearts</p>
+    </footer>
+
+    {{funeralHomeBrandingHTML}}
+
+    <!-- GentlyTold Credit -->
+    <div class="gently-told-credit">
+        <a href="https://gentlytold.com" target="_blank">A life, gently told · GentlyTold.com</a>
+    </div>
+
+</body>
+</html>

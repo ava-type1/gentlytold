@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share a Memory — GentlyTold</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0a0a;
+            color: #e8e0d8;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: #c4a478; text-decoration: none; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(196, 164, 120, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: #c4a478;
+            letter-spacing: 0.5rem;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            color: #f5efe8;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #a89880;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Content */
+        .content {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #f5efe8;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: #c4a478;
+            margin: 1rem auto 2.5rem;
+        }
+
+        /* Memory Form */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: #c4a478;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group .hint {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #7a7068;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(196, 164, 120, 0.06);
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            border-radius: 6px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #c4a478;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #5a5450;
+        }
+
+        /* Upload Zone */
+        .upload-zone {
+            border: 2px dashed rgba(196, 164, 120, 0.25);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: #c4a478;
+            background: rgba(196, 164, 120, 0.05);
+        }
+
+        .upload-zone .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upload-zone h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #f5efe8;
+            margin-bottom: 0.4rem;
+        }
+
+        .upload-zone p {
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: #7a7068;
+        }
+
+        .upload-zone input[type="file"] {
+            display: none;
+        }
+
+        .photo-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-preview {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-preview .remove-photo {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            width: 22px;
+            height: 22px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(180, 80, 80, 0.5);
+            border-radius: 50%;
+            color: #b45050;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(196, 164, 120, 0.15);
+            border: 1px solid rgba(196, 164, 120, 0.4);
+            border-radius: 6px;
+            color: #c4a478;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: rgba(196, 164, 120, 0.25);
+            border-color: #c4a478;
+        }
+
+        /* Success */
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .success-msg.visible {
+            display: block;
+        }
+
+        .success-msg .check-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-msg h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #f5efe8;
+            margin-bottom: 0.75rem;
+        }
+
+        .success-msg p {
+            font-weight: 300;
+            color: #a89880;
+            line-height: 1.7;
+        }
+
+        /* Existing Memories */
+        .memories-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.1);
+        }
+
+        .memory-card {
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .memory-card .mc-text {
+            font-weight: 300;
+            color: #d4ccc4;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+
+        .memory-card .mc-author {
+            font-size: 0.85rem;
+            color: #c4a478;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(196, 164, 120, 0.08);
+        }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #4a4440;
+        }
+
+        .footer a {
+            color: #5a5450;
+        }
+
+        .footer a:hover { color: #c4a478; }
+
+        @media (max-width: 600px) {
+            .content { padding: 2rem 1.5rem 4rem; }
+            .hero { padding: 4rem 1.5rem 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="ornament">✦ ✦ ✦</div>
+        <h1>Share a Memory</h1>
+        <p>
+            Help us honor their life. Share a story, a favorite memory, or a photo — 
+            every contribution makes this tribute more complete.
+        </p>
+    </section>
+
+    <!-- Content -->
+    <div class="content">
+        
+        <!-- Memory Form -->
+        <div id="memoryForm">
+            <h2 class="section-title">Add Your Memory</h2>
+            <div class="section-divider"></div>
+
+            <div class="form-group">
+                <label for="contributorName">Your Name</label>
+                <input type="text" id="contributorName" placeholder="Your name">
+            </div>
+
+            <div class="form-group">
+                <label for="relationship">Your Relationship</label>
+                <input type="text" id="relationship" placeholder="Friend, neighbor, colleague, family...">
+            </div>
+
+            <div class="form-group">
+                <label for="memoryText">Your Memory</label>
+                <div class="hint">Share a favorite story, a funny moment, or what they meant to you.</div>
+                <textarea id="memoryText" rows="6" placeholder="I remember when..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Share Photos</label>
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📷</div>
+                    <h3>Drag & drop photos</h3>
+                    <p>or click to browse</p>
+                    <input type="file" id="photoInput" multiple accept="image/*">
+                </div>
+                <div class="photo-preview-grid" id="photoPreview"></div>
+            </div>
+
+            <button class="submit-btn" onclick="submitMemory()">Share This Memory</button>
+        </div>
+
+        <!-- Success -->
+        <div class="success-msg" id="successMsg">
+            <div class="check-icon">✦</div>
+            <h2>Thank You</h2>
+            <p>
+                Your memory has been submitted. It means so much to the family to know their loved one 
+                touched so many lives.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <a href="#" onclick="resetForm(); return false;" style="color: #c4a478;">Share another memory →</a>
+            </p>
+        </div>
+
+        <!-- Existing Memories (placeholder for future dynamic content) -->
+        <div class="memories-section" id="memoriesSection" style="display: none;">
+            <h2 class="section-title">Shared Memories</h2>
+            <div class="section-divider"></div>
+            <div id="memoriesList"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Memorial by <a href="https://gentlytold.com">GentlyTold</a> · A life, gently told.</p>
+    </footer>
+
+    <script>
+        // --- Photo Upload ---
+        let photos = [];
+        const uploadZone = document.getElementById('uploadZone');
+        const photoInput = document.getElementById('photoInput');
+
+        uploadZone.addEventListener('click', () => photoInput.click());
+        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        photoInput.addEventListener('change', e => handleFiles(e.target.files));
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                photos.push(file);
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const grid = document.getElementById('photoPreview');
+                    const div = document.createElement('div');
+                    div.className = 'photo-preview';
+                    const idx = photos.length - 1;
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Memory photo">
+                        <button class="remove-photo" onclick="removePhoto(${idx}, this)">×</button>
+                    `;
+                    grid.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removePhoto(idx, btn) {
+            photos[idx] = null;
+            btn.closest('.photo-preview').remove();
+        }
+
+        // --- Submit ---
+        function submitMemory() {
+            const name = document.getElementById('contributorName').value.trim();
+            const relationship = document.getElementById('relationship').value.trim();
+            const memory = document.getElementById('memoryText').value.trim();
+
+            if (!memory && photos.filter(p => p).length === 0) {
+                alert('Please share a memory or upload a photo.');
+                return;
+            }
+
+            const data = {
+                name: name || 'Anonymous',
+                relationship,
+                memory,
+                photoCount: photos.filter(p => p !== null).length,
+                submittedAt: new Date().toISOString()
+            };
+
+            console.log('Memory contribution:', JSON.stringify(data, null, 2));
+
+            // Show success
+            document.getElementById('memoryForm').style.display = 'none';
+            document.getElementById('successMsg').classList.add('visible');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Reset ---
+        function resetForm() {
+            document.getElementById('contributorName').value = '';
+            document.getElementById('relationship').value = '';
+            document.getElementById('memoryText').value = '';
+            document.getElementById('photoPreview').innerHTML = '';
+            photos = [];
+            document.getElementById('successMsg').classList.remove('visible');
+            document.getElementById('memoryForm').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
