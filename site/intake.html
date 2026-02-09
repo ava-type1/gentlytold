@@ -40,15 +40,302 @@
             color: #a89880;
         }
 
+        /* ===================== */
+        /* Quick Start Section   */
+        /* ===================== */
+        .quick-start {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .quick-start-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quick-start-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #f5efe8;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-start-header p {
+            font-weight: 300;
+            color: #a89880;
+            font-size: 1.05rem;
+        }
+
+        /* Path Toggle */
+        .path-toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .path-toggle-btn {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #7a7068;
+            background: transparent;
+            border: none;
+            border-right: 1px solid rgba(196, 164, 120, 0.15);
+        }
+
+        .path-toggle-btn:last-child { border-right: none; }
+
+        .path-toggle-btn.active {
+            color: #c4a478;
+            background: rgba(196, 164, 120, 0.12);
+        }
+
+        .path-toggle-btn:hover:not(.active) {
+            background: rgba(196, 164, 120, 0.05);
+            color: #a89880;
+        }
+
+        .path-toggle-btn .toggle-icon {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .path-toggle-btn .toggle-label {
+            display: block;
+            font-size: 0.8rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            margin-top: 0.25rem;
+            opacity: 0.7;
+        }
+
+        /* Paste Panel */
+        .paste-panel {
+            margin-bottom: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .paste-panel.hidden { display: none; }
+
+        .paste-textarea {
+            width: 100%;
+            min-height: 220px;
+            padding: 1.25rem;
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            border-radius: 10px;
+            color: #e8e0d8;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            outline: none;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .paste-textarea:focus {
+            border-color: #c4a478;
+        }
+
+        .paste-textarea::placeholder {
+            color: #5a5450;
+            line-height: 1.7;
+        }
+
+        .autofill-btn {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #c4a478, #d4b488);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .autofill-btn:hover {
+            background: linear-gradient(135deg, #d4b488, #e4c498);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(196, 164, 120, 0.3);
+        }
+
+        .autofill-btn:active {
+            transform: translateY(0);
+        }
+
+        .autofill-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .autofill-result {
+            margin-top: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .autofill-result.success {
+            display: block;
+            background: rgba(100, 180, 100, 0.08);
+            border: 1px solid rgba(100, 180, 100, 0.25);
+            color: #a8d4a8;
+        }
+
+        .autofill-result.partial {
+            display: block;
+            background: rgba(196, 164, 120, 0.08);
+            border: 1px solid rgba(196, 164, 120, 0.25);
+            color: #c4a478;
+        }
+
+        .autofill-result .result-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .autofill-result ul {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .autofill-result li { margin-bottom: 0.2rem; }
+
+        .proceed-btn {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid #c4a478;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #c4a478;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .proceed-btn:hover {
+            background: rgba(196, 164, 120, 0.1);
+        }
+
+        /* Email Callout */
+        .email-callout {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(196, 164, 120, 0.04);
+            border: 1px solid rgba(196, 164, 120, 0.12);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .email-callout .callout-divider {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            color: #5a5450;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .email-callout h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #f5efe8;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-callout p {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: #7a7068;
+            margin-bottom: 0.75rem;
+        }
+
+        .email-callout a.email-link {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(196, 164, 120, 0.35);
+            border-radius: 6px;
+            color: #c4a478;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .email-callout a.email-link:hover {
+            background: rgba(196, 164, 120, 0.1);
+            border-color: #c4a478;
+        }
+
+        /* Divider */
+        .section-divider {
+            max-width: 700px;
+            margin: 2.5rem auto 0;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-divider .divider-line {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #3a3530;
+        }
+
+        .section-divider .divider-line::before,
+        .section-divider .divider-line::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 164, 120, 0.1);
+        }
+
+        .section-divider .divider-line span {
+            font-size: 0.8rem;
+            color: #5a5450;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            white-space: nowrap;
+        }
+
         /* Progress */
         .progress-bar {
             max-width: 700px;
-            margin: 3rem auto 1rem;
+            margin: 2rem auto 1rem;
             padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             position: relative;
         }
+
+        .progress-bar.hidden { display: none; }
 
         .progress-bar::before {
             content: '';
@@ -117,6 +404,8 @@
             padding: 0 2rem;
         }
 
+        .form-container.hidden { display: none; }
+
         .step-content {
             display: none;
         }
@@ -139,6 +428,22 @@
             color: #a89880;
             margin-bottom: 2.5rem;
             font-size: 0.95rem;
+        }
+
+        .autofill-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            background: rgba(100, 180, 100, 0.15);
+            border: 1px solid rgba(100, 180, 100, 0.25);
+            border-radius: 4px;
+            color: #a8d4a8;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            vertical-align: middle;
+            margin-left: 0.5rem;
         }
 
         /* Form Elements */
@@ -177,7 +482,7 @@
             font-family: 'Lato', sans-serif;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background 0.3s;
         }
 
         .form-group input:focus,
@@ -194,6 +499,13 @@
         .form-group select option {
             background: #1a1510;
             color: #e8e0d8;
+        }
+
+        /* Highlight auto-filled fields */
+        .form-group input.autofilled,
+        .form-group textarea.autofilled {
+            background: rgba(100, 180, 100, 0.06);
+            border-color: rgba(100, 180, 100, 0.3);
         }
 
         .form-row {
@@ -544,6 +856,8 @@
             .form-buttons { flex-direction: column-reverse; }
             .btn-next { max-width: 100%; }
             .progress-step .step-label { font-size: 0.65rem; }
+            .quick-start-header h1 { font-size: 1.6rem; }
+            .path-toggle-btn { padding: 0.75rem 0.5rem; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -554,6 +868,65 @@
         <a href="index.html" class="header-brand">GentlyTold</a>
         <a href="index.html" class="header-back">← Back to home</a>
     </header>
+
+    <!-- ========================== -->
+    <!-- Quick Start: Paste Section -->
+    <!-- ========================== -->
+    <div class="quick-start" id="quickStart">
+        <div class="quick-start-header">
+            <h1>Create a Memorial Page</h1>
+            <p>The fastest way? Paste the obituary and we'll do the rest.</p>
+        </div>
+
+        <!-- Path Toggle -->
+        <div class="path-toggle">
+            <button class="path-toggle-btn active" onclick="setPath('paste')" id="pathPaste">
+                <span class="toggle-icon">📋</span>
+                Paste an Obituary
+                <span class="toggle-label">Auto-fill the form in one click</span>
+            </button>
+            <button class="path-toggle-btn" onclick="setPath('manual')" id="pathManual">
+                <span class="toggle-icon">✏️</span>
+                Start from Scratch
+                <span class="toggle-label">Fill out each field manually</span>
+            </button>
+        </div>
+
+        <!-- Paste Panel -->
+        <div class="paste-panel" id="pastePanel">
+            <textarea class="paste-textarea" id="obituaryText" placeholder="Paste the full obituary text here...
+
+Example:
+John David Smith, age 85, of Fort White, Florida, passed away peacefully on January 10, 2026. Born on March 15, 1940, in Jacksonville, FL, John was a beloved father, grandfather, and friend to all who knew him..."></textarea>
+
+            <button class="autofill-btn" id="autofillBtn" onclick="parseObituary()">
+                ✨ Auto-Fill From Obituary
+            </button>
+
+            <div class="autofill-result" id="autofillResult"></div>
+
+            <button class="proceed-btn" id="proceedBtn" style="display: none;" onclick="proceedToReview()">
+                Review & Complete →
+            </button>
+        </div>
+
+        <!-- Email Callout -->
+        <div class="email-callout">
+            <div class="callout-divider">— or —</div>
+            <h3>Want us to handle everything?</h3>
+            <p>Just email us the obituary and any photos. We'll build the entire memorial page for you — no form needed.</p>
+            <a href="mailto:hello@gentlytold.com?subject=Memorial%20Page%20Request" class="email-link">
+                ✉ hello@gentlytold.com
+            </a>
+        </div>
+    </div>
+
+    <!-- Divider between quick-start and form -->
+    <div class="section-divider" id="sectionDivider">
+        <div class="divider-line">
+            <span id="dividerText">Paste above, or fill out the form below</span>
+        </div>
+    </div>
 
     <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar">
@@ -581,7 +954,7 @@
         <!-- Step 1: Basic Info -->
         <div class="step-content active" data-step="1">
             <h2 class="step-title">Basic Information</h2>
-            <p class="step-subtitle">Tell us about the person (or couple) being honored.</p>
+            <p class="step-subtitle" id="step1Subtitle">Tell us about the person (or couple) being honored.</p>
 
             <label class="form-group" style="font-family: 'Playfair Display', serif; color: #c4a478; font-size: 0.95rem; margin-bottom: 0.75rem;">Memorial Type</label>
             <div class="toggle-group">
@@ -647,7 +1020,7 @@
         <!-- Step 2: Life Story -->
         <div class="step-content" data-step="2">
             <h2 class="step-title">Life Story</h2>
-            <p class="step-subtitle">Share their story. Paste an existing obituary or write something new.</p>
+            <p class="step-subtitle">Share their story. Edit what was auto-filled, or write something new.</p>
 
             <div class="form-group">
                 <label>Their Story</label>
@@ -794,6 +1167,390 @@
         let memorialType = 'individual';
         let uploadedPhotos = [];
         let uploadedLogo = null;
+        let wasAutofilled = false;
+
+        // ===========================
+        // PATH TOGGLE (paste vs manual)
+        // ===========================
+        function setPath(path) {
+            document.getElementById('pathPaste').classList.toggle('active', path === 'paste');
+            document.getElementById('pathManual').classList.toggle('active', path === 'manual');
+            document.getElementById('pastePanel').classList.toggle('hidden', path !== 'paste');
+
+            if (path === 'manual') {
+                document.getElementById('dividerText').textContent = 'Fill out the form below';
+                // Scroll to the form
+                document.getElementById('progressBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                document.getElementById('dividerText').textContent = 'Paste above, or fill out the form below';
+            }
+        }
+
+        // ===========================
+        // OBITUARY PARSER
+        // ===========================
+        function parseObituary() {
+            const text = document.getElementById('obituaryText').value.trim();
+            if (!text) {
+                alert('Please paste an obituary first.');
+                return;
+            }
+
+            const btn = document.getElementById('autofillBtn');
+            btn.disabled = true;
+            btn.textContent = 'Parsing...';
+
+            // Slight delay for visual feedback
+            setTimeout(() => {
+                try {
+                    const result = extractFromObituary(text);
+                    applyExtraction(result);
+                    showResult(result);
+                } catch (e) {
+                    console.error('Parse error:', e);
+                    showResult({ filled: [], missed: ['Could not parse — please fill out the form manually.'] });
+                }
+                btn.disabled = false;
+                btn.textContent = '✨ Auto-Fill From Obituary';
+            }, 400);
+        }
+
+        function extractFromObituary(text) {
+            const result = {
+                name: null,
+                birthDate: null,
+                deathDate: null,
+                location: null,
+                age: null,
+                story: null,
+                familyMembers: [],
+                familyNote: null,
+                heroQuote: null,
+                closingQuote: null,
+                timelineEvents: [],
+                isCouple: false,
+                name2: null,
+                birthDate2: null,
+                deathDate2: null,
+                filled: [],
+                missed: []
+            };
+
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+
+            // --- NAME extraction ---
+            // Pattern: "FirstName MiddleName LastName, age XX"
+            // Pattern: "FirstName MiddleName LastName, XX, of City"
+            // Pattern: Just the first line if it looks like a name
+            const nameAgeMatch = text.match(/^([A-Z][a-zA-Z]+(?:\s+(?:[A-Z]\.?\s*)?[a-zA-Z]+){1,4})\s*,\s*(?:age\s+)?(\d{2,3})/im);
+            const nameOfMatch = text.match(/^([A-Z][a-zA-Z]+(?:\s+(?:[A-Z]\.?\s*)?[a-zA-Z]+){1,4})\s*,\s*(?:\d{2,3}\s*,\s*)?of\s+([A-Za-z\s]+(?:,\s*[A-Za-z\s]+)?)/im);
+            const namePassedMatch = text.match(/([A-Z][a-zA-Z]+(?:\s+(?:[A-Z]\.?\s*)?[a-zA-Z]+){1,4})\s*(?:,\s*(?:age\s+)?\d{2,3}\s*,?\s*)?(?:passed away|died|went home|entered into rest|departed|transitioned)/i);
+            const nameBornMatch = text.match(/([A-Z][a-zA-Z]+(?:\s+(?:[A-Z]\.?\s*)?[a-zA-Z]+){1,4})\s*(?:was\s+)?born/i);
+
+            if (nameAgeMatch) {
+                result.name = nameAgeMatch[1].trim();
+                result.age = nameAgeMatch[2];
+            } else if (nameOfMatch) {
+                result.name = nameOfMatch[1].trim();
+            } else if (namePassedMatch) {
+                result.name = namePassedMatch[1].trim();
+            } else if (nameBornMatch) {
+                result.name = nameBornMatch[1].trim();
+            }
+
+            if (result.name) {
+                result.filled.push('Name');
+            } else {
+                result.missed.push('Name');
+            }
+
+            // --- LOCATION ---
+            if (nameOfMatch && nameOfMatch[2]) {
+                result.location = nameOfMatch[2].trim().replace(/\s*,?\s*$/, '');
+                result.filled.push('Location');
+            } else {
+                const locMatch = text.match(/of\s+([A-Z][a-zA-Z\s]+,\s*[A-Z]{2}|[A-Z][a-zA-Z\s]+,\s*[A-Z][a-zA-Z]+)/);
+                if (locMatch) {
+                    result.location = locMatch[1].trim();
+                    result.filled.push('Location');
+                } else {
+                    result.missed.push('Location');
+                }
+            }
+
+            // --- DATES ---
+            // Common date formats
+            const datePattern = /(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4}/gi;
+            const shortDatePattern = /\d{1,2}\/\d{1,2}\/\d{2,4}/g;
+
+            // Death date patterns
+            const deathPatterns = [
+                /passed\s+away\s+(?:peacefully\s+)?(?:on\s+)?([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})/i,
+                /died\s+(?:on\s+)?([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})/i,
+                /(?:on|dated?)\s+([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})\s*[,.]?\s*(?:at|in|surrounded)/i,
+                /(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4}\s*[-–—]\s*([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})/i,
+            ];
+
+            for (const pat of deathPatterns) {
+                const m = text.match(pat);
+                if (m) {
+                    result.deathDate = m[1].replace(/(\d+)(?:st|nd|rd|th)/i, '$1');
+                    break;
+                }
+            }
+
+            // Birth date patterns
+            const birthPatterns = [
+                /born\s+(?:on\s+)?([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})/i,
+                /born\s+(?:on\s+)?(?:in\s+[A-Za-z\s,]+\s+on\s+)?([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})/i,
+                /([A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4})\s*[-–—]\s*[A-Z][a-z]+\s+\d{1,2}/i,
+            ];
+
+            for (const pat of birthPatterns) {
+                const m = text.match(pat);
+                if (m) {
+                    result.birthDate = m[1].replace(/(\d+)(?:st|nd|rd|th)/i, '$1');
+                    break;
+                }
+            }
+
+            // Also try "Month Day, Year – Month Day, Year" pattern in parens or after name
+            if (!result.birthDate || !result.deathDate) {
+                const rangeMatch = text.match(/\(?\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[-–—]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*\)?/);
+                if (rangeMatch) {
+                    if (!result.birthDate) result.birthDate = rangeMatch[1].trim();
+                    if (!result.deathDate) result.deathDate = rangeMatch[2].trim();
+                }
+            }
+
+            if (result.birthDate) result.filled.push('Date of Birth');
+            else result.missed.push('Date of Birth');
+            if (result.deathDate) result.filled.push('Date of Passing');
+            else result.missed.push('Date of Passing');
+
+            // --- FAMILY MEMBERS (survived by section) ---
+            const survivedMatch = text.match(/(?:survived by|leaves behind|is survived by|survivors include|cherished by)[:\s]*([\s\S]*?)(?=\n\s*\n|(?:preceded in death|predeceased|funeral|memorial|service|in lieu|visitation|celebration of life|arrangements|the family|pallbearers|a\s+(?:memorial|funeral|celebration)))/i);
+            if (survivedMatch) {
+                const survivedText = survivedMatch[1];
+                // Extract names — look for patterns like "his/her/their son, Name" or just names after relationship words
+                const familyPattern = /(?:son|daughter|brother|sister|wife|husband|grandson|granddaughter|grandchild|niece|nephew|mother|father|aunt|uncle)[s]?\s*[,:]?\s*([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3})/gi;
+                let famMatch;
+                const seen = new Set();
+                while ((famMatch = familyPattern.exec(survivedText)) !== null) {
+                    const name = famMatch[1].trim();
+                    if (!seen.has(name.toLowerCase()) && name.length > 2) {
+                        seen.add(name.toLowerCase());
+                        result.familyMembers.push(name);
+                    }
+                }
+
+                // Also try semicolon-separated list approach
+                if (result.familyMembers.length === 0) {
+                    const parts = survivedText.split(/[;]/);
+                    for (const part of parts) {
+                        const nameInPart = part.match(/([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3})/);
+                        if (nameInPart) {
+                            const n = nameInPart[1].trim();
+                            if (!seen.has(n.toLowerCase()) && n.length > 2) {
+                                seen.add(n.toLowerCase());
+                                result.familyMembers.push(n);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result.familyMembers.length > 0) {
+                result.filled.push('Family Members (' + result.familyMembers.length + ')');
+            } else {
+                result.missed.push('Family Members');
+            }
+
+            // --- PRECEDED IN DEATH (family note) ---
+            const precededMatch = text.match(/(?:preceded in death|predeceased)\s+by[:\s]*([\s\S]*?)(?=\.\s*[A-Z]|\n\s*\n|$)/i);
+            if (precededMatch) {
+                result.familyNote = 'Preceded in death by ' + precededMatch[1].trim().replace(/\.$/, '');
+                result.filled.push('Family Note');
+            }
+
+            // --- STORY TEXT ---
+            // The story is typically the middle section — after the intro paragraph (name/dates)
+            // and before the "survived by" section
+            const paragraphs = text.split(/\n\s*\n/);
+            const storyParagraphs = [];
+
+            for (let i = 0; i < paragraphs.length; i++) {
+                const p = paragraphs[i].trim();
+                if (!p) continue;
+                // Skip if it's clearly the header/intro line (has name + dates + passed away)
+                if (i === 0 && /(?:passed away|died|born|age\s+\d)/i.test(p) && p.length < 500) continue;
+                // Skip survived by sections
+                if (/(?:survived by|leaves behind|preceded in death|pallbearer|funeral|memorial service|visitation|in lieu of|arrangements|celebration of life)/i.test(p)) continue;
+                // Skip short service-detail lines
+                if (p.length < 40 && /(?:funeral|memorial|visitation|cemetery|church)/i.test(p)) continue;
+                storyParagraphs.push(p);
+            }
+
+            if (storyParagraphs.length > 0) {
+                result.story = storyParagraphs.join('\n\n');
+                result.filled.push('Life Story');
+            } else {
+                // Fallback: use the whole text as story
+                result.story = text;
+                result.filled.push('Life Story (full text)');
+            }
+
+            // --- TIMELINE extraction ---
+            // Look for year references in the text
+            const yearMentions = text.match(/(?:in\s+)(\d{4})[,.\s]/gi);
+            if (yearMentions && yearMentions.length > 0) {
+                // Extract sentences containing years
+                const sentences = text.split(/[.!?]+/);
+                const seenYears = new Set();
+                for (const sentence of sentences) {
+                    const yearInSentence = sentence.match(/(?:in\s+)?(\d{4})/);
+                    if (yearInSentence) {
+                        const year = yearInSentence[1];
+                        const yearNum = parseInt(year);
+                        if (yearNum >= 1900 && yearNum <= 2030 && !seenYears.has(year)) {
+                            seenYears.add(year);
+                            const cleanSentence = sentence.trim();
+                            if (cleanSentence.length > 15 && cleanSentence.length < 300) {
+                                result.timelineEvents.push({ year: year, text: cleanSentence });
+                            }
+                        }
+                    }
+                }
+                // Limit to 8 events
+                result.timelineEvents = result.timelineEvents.slice(0, 8);
+                if (result.timelineEvents.length > 0) {
+                    result.filled.push('Timeline Events (' + result.timelineEvents.length + ')');
+                }
+            }
+
+            // --- QUOTES ---
+            // Look for text in quotes
+            const quoteMatches = text.match(/"([^"]{10,200})"/g);
+            if (quoteMatches && quoteMatches.length > 0) {
+                result.heroQuote = quoteMatches[0].replace(/"/g, '');
+                result.filled.push('Quote');
+                if (quoteMatches.length > 1) {
+                    result.closingQuote = quoteMatches[quoteMatches.length - 1].replace(/"/g, '');
+                }
+            }
+
+            return result;
+        }
+
+        function applyExtraction(result) {
+            wasAutofilled = true;
+
+            function setField(id, value) {
+                if (value) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.value = value;
+                        el.classList.add('autofilled');
+                    }
+                }
+            }
+
+            setField('personName1', result.name);
+            setField('personBorn1', result.birthDate);
+            setField('personDied1', result.deathDate);
+            setField('location1', result.location);
+            setField('storyText', result.story);
+            setField('heroQuote', result.heroQuote);
+            setField('closingQuote', result.closingQuote);
+            setField('familyNote', result.familyNote);
+
+            // Couple detection
+            if (result.isCouple) {
+                setType('couple');
+                setField('personName2', result.name2);
+                setField('personBorn2', result.birthDate2);
+                setField('personDied2', result.deathDate2);
+            }
+
+            // Family members
+            if (result.familyMembers.length > 0) {
+                const container = document.getElementById('familyEntries');
+                container.innerHTML = '';
+                result.familyMembers.forEach(name => {
+                    const entry = document.createElement('div');
+                    entry.className = 'family-entry';
+                    entry.innerHTML = `
+                        <input type="text" placeholder="Name" class="fm-name" value="${escHtml(name)}">
+                        <button class="remove-btn" onclick="removeEntry(this, 'familyEntries')" title="Remove">×</button>
+                    `;
+                    container.appendChild(entry);
+                });
+            }
+
+            // Timeline events
+            if (result.timelineEvents.length > 0) {
+                const container = document.getElementById('timelineEntries');
+                container.innerHTML = '';
+                result.timelineEvents.forEach(event => {
+                    const entry = document.createElement('div');
+                    entry.className = 'timeline-entry';
+                    entry.innerHTML = `
+                        <input type="text" placeholder="Year / Label" class="tl-year" value="${escHtml(event.year)}">
+                        <textarea placeholder="What happened..." class="tl-text">${escHtml(event.text)}</textarea>
+                        <button class="remove-btn" onclick="removeEntry(this, 'timelineEntries')" title="Remove">×</button>
+                    `;
+                    container.appendChild(entry);
+                });
+            }
+        }
+
+        function showResult(result) {
+            const el = document.getElementById('autofillResult');
+            const proceedBtn = document.getElementById('proceedBtn');
+
+            if (result.filled.length === 0) {
+                el.className = 'autofill-result partial';
+                el.innerHTML = `
+                    <div class="result-title">⚠️ Couldn't extract much from this text</div>
+                    <p>The obituary format wasn't recognized. You can still fill out the form below — the full text has been added to the Life Story field.</p>
+                `;
+                proceedBtn.style.display = 'block';
+                return;
+            }
+
+            let html = '';
+            if (result.missed.length === 0) {
+                el.className = 'autofill-result success';
+                html += '<div class="result-title">✅ All fields auto-filled!</div>';
+            } else {
+                el.className = 'autofill-result success';
+                html += '<div class="result-title">✅ Auto-filled ' + result.filled.length + ' fields</div>';
+            }
+
+            html += '<ul>';
+            result.filled.forEach(f => {
+                html += '<li>✓ ' + f + '</li>';
+            });
+            result.missed.forEach(f => {
+                html += '<li style="color: #a89880;">○ ' + f + ' — please fill in manually</li>';
+            });
+            html += '</ul>';
+
+            if (result.missed.length > 0) {
+                html += '<p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.7;">Review the form below to fill in any missing fields and check what was extracted.</p>';
+            }
+
+            el.innerHTML = html;
+            proceedBtn.style.display = 'block';
+        }
+
+        function proceedToReview() {
+            // Update subtitle to indicate review mode
+            document.getElementById('step1Subtitle').innerHTML = 'Review the auto-filled information below. <span class="autofill-badge">Auto-Filled</span>';
+
+            // Scroll to the form
+            document.getElementById('progressBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
         // --- Type Toggle ---
         function setType(type) {
@@ -826,7 +1583,7 @@
                 el.classList.toggle('active', s === step);
                 el.classList.toggle('completed', s < step);
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: document.getElementById('progressBar').offsetTop - 20, behavior: 'smooth' });
         }
 
         // --- Validation ---
@@ -853,6 +1610,10 @@
         document.addEventListener('input', e => {
             const group = e.target.closest('.form-group');
             if (group) group.classList.remove('invalid');
+            // Remove autofilled highlight when user edits
+            if (e.target.classList.contains('autofilled')) {
+                e.target.classList.remove('autofilled');
+            }
         });
 
         // --- Dynamic Fields ---
@@ -946,6 +1707,7 @@
             html += reviewField('Type', memorialType === 'couple' ? 'Couple' : 'Individual');
             html += reviewField('Name', val('personName1'));
             html += reviewField('Born — Passed', val('personBorn1') + ' — ' + val('personDied1'));
+            if (val('location1')) html += reviewField('Location', val('location1'));
             if (memorialType === 'couple') {
                 html += reviewField('Name (2)', val('personName2'));
                 html += reviewField('Born — Passed (2)', val('personBorn2') + ' — ' + val('personDied2'));
@@ -994,7 +1756,7 @@
         }
 
         function escHtml(s) {
-            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
         // --- Submit ---
@@ -1038,6 +1800,7 @@
                 formEmail: val('formEmail'),
                 photoCount: uploadedPhotos.filter(p => p !== null).length,
                 hasLogo: !!uploadedLogo,
+                wasAutofilled: wasAutofilled,
                 submittedAt: new Date().toISOString()
             };
 
@@ -1046,6 +1809,8 @@
             // Show success
             document.getElementById('formContainer').style.display = 'none';
             document.getElementById('progressBar').style.display = 'none';
+            document.getElementById('quickStart').style.display = 'none';
+            document.getElementById('sectionDivider').style.display = 'none';
             document.getElementById('successMessage').classList.add('visible');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
