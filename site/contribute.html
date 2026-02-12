@@ -220,10 +220,33 @@
             transition: all 0.3s;
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             background: rgba(196, 164, 120, 0.25);
             border-color: #c4a478;
         }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .submit-btn.loading {
+            color: #7a7068;
+        }
+
+        /* Error */
+        .error-msg {
+            background: rgba(180, 80, 80, 0.1);
+            border: 1px solid rgba(180, 80, 80, 0.3);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            color: #c47a7a;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .error-msg.visible { display: block; }
 
         /* Success */
         .success-msg {
@@ -252,6 +275,24 @@
             font-weight: 300;
             color: #a89880;
             line-height: 1.7;
+        }
+
+        /* Missing Memorial */
+        .missing-memorial {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .missing-memorial h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #c4a478;
+            margin-bottom: 1rem;
+        }
+
+        .missing-memorial p {
+            color: #7a7068;
+            font-weight: 300;
         }
 
         /* Existing Memories */
@@ -320,11 +361,19 @@
 
     <!-- Content -->
     <div class="content">
-        
+
+        <!-- No memorial slug -->
+        <div class="missing-memorial" id="missingMemorial" style="display: none;">
+            <h2>Memorial Not Found</h2>
+            <p>This link seems to be missing the memorial reference. Please check the link you were given and try again.</p>
+        </div>
+
         <!-- Memory Form -->
         <div id="memoryForm">
             <h2 class="section-title">Add Your Memory</h2>
             <div class="section-divider"></div>
+
+            <div class="error-msg" id="errorMsg"></div>
 
             <div class="form-group">
                 <label for="contributorName">Your Name</label>
@@ -343,17 +392,17 @@
             </div>
 
             <div class="form-group">
-                <label>Share Photos</label>
+                <label>Share a Photo <span style="font-family: Lato; font-weight: 300; font-size: 0.8rem; color: #7a7068;">(optional)</span></label>
                 <div class="upload-zone" id="uploadZone">
                     <div class="upload-icon">📷</div>
-                    <h3>Drag & drop photos</h3>
-                    <p>or click to browse</p>
-                    <input type="file" id="photoInput" multiple accept="image/*">
+                    <h3>Drag & drop a photo</h3>
+                    <p>or click to browse · Max 5MB</p>
+                    <input type="file" id="photoInput" accept="image/*">
                 </div>
                 <div class="photo-preview-grid" id="photoPreview"></div>
             </div>
 
-            <button class="submit-btn" onclick="submitMemory()">Share This Memory</button>
+            <button class="submit-btn" id="submitBtn" onclick="submitMemory()">Share This Memory</button>
         </div>
 
         <!-- Success -->
@@ -361,15 +410,14 @@
             <div class="check-icon">✦</div>
             <h2>Thank You</h2>
             <p>
-                Your memory has been submitted. It means so much to the family to know their loved one 
-                touched so many lives.
+                Your memory has been submitted and will appear on the page once reviewed by the family. Thank you.
             </p>
             <p style="margin-top: 1.5rem;">
                 <a href="#" onclick="resetForm(); return false;" style="color: #c4a478;">Share another memory →</a>
             </p>
         </div>
 
-        <!-- Existing Memories (placeholder for future dynamic content) -->
+        <!-- Existing Memories -->
         <div class="memories-section" id="memoriesSection" style="display: none;">
             <h2 class="section-title">Shared Memories</h2>
             <div class="section-divider"></div>
@@ -383,8 +431,23 @@
     </footer>
 
     <script>
-        // --- Photo Upload ---
-        let photos = [];
+        const API_BASE = 'https://gentlytold-memories.kameronmartinllc.workers.dev';
+
+        // Get memorial slug from URL params
+        const params = new URLSearchParams(window.location.search);
+        const MEMORIAL_SLUG = params.get('memorial') || params.get('slug') || '';
+
+        // If no slug, show error state
+        if (!MEMORIAL_SLUG) {
+            document.getElementById('memoryForm').style.display = 'none';
+            document.getElementById('missingMemorial').style.display = 'block';
+        } else {
+            // Load existing approved memories
+            loadMemories();
+        }
+
+        // --- Photo Upload (single photo) ---
+        let photoFile = null;
         const uploadZone = document.getElementById('uploadZone');
         const photoInput = document.getElementById('photoInput');
 
@@ -394,60 +457,120 @@
         uploadZone.addEventListener('drop', e => {
             e.preventDefault();
             uploadZone.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files);
+            if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
         });
-        photoInput.addEventListener('change', e => handleFiles(e.target.files));
+        photoInput.addEventListener('change', e => {
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
 
-        function handleFiles(files) {
-            Array.from(files).forEach(file => {
-                if (!file.type.startsWith('image/')) return;
-                photos.push(file);
-                const reader = new FileReader();
-                reader.onload = e => {
-                    const grid = document.getElementById('photoPreview');
-                    const div = document.createElement('div');
-                    div.className = 'photo-preview';
-                    const idx = photos.length - 1;
-                    div.innerHTML = `
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) return;
+            if (file.size > 5 * 1024 * 1024) {
+                showError('Photo must be under 5MB.');
+                return;
+            }
+            photoFile = file;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const grid = document.getElementById('photoPreview');
+                grid.innerHTML = `
+                    <div class="photo-preview">
                         <img src="${e.target.result}" alt="Memory photo">
-                        <button class="remove-photo" onclick="removePhoto(${idx}, this)">×</button>
-                    `;
-                    grid.appendChild(div);
-                };
-                reader.readAsDataURL(file);
-            });
+                        <button class="remove-photo" onclick="removePhoto()">×</button>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(file);
         }
 
-        function removePhoto(idx, btn) {
-            photos[idx] = null;
-            btn.closest('.photo-preview').remove();
+        function removePhoto() {
+            photoFile = null;
+            document.getElementById('photoPreview').innerHTML = '';
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.classList.add('visible');
+            setTimeout(() => el.classList.remove('visible'), 5000);
         }
 
         // --- Submit ---
-        function submitMemory() {
+        async function submitMemory() {
             const name = document.getElementById('contributorName').value.trim();
             const relationship = document.getElementById('relationship').value.trim();
             const memory = document.getElementById('memoryText').value.trim();
 
-            if (!memory && photos.filter(p => p).length === 0) {
-                alert('Please share a memory or upload a photo.');
+            if (!memory) {
+                showError('Please share a memory or story.');
                 return;
             }
 
-            const data = {
-                name: name || 'Anonymous',
-                relationship,
-                memory,
-                photoCount: photos.filter(p => p !== null).length,
-                submittedAt: new Date().toISOString()
-            };
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.classList.add('loading');
+            btn.textContent = 'Submitting...';
 
-            console.log('Memory contribution:', JSON.stringify(data, null, 2));
+            const formData = new FormData();
+            formData.append('name', name || 'Anonymous');
+            formData.append('relationship', relationship);
+            formData.append('memory', memory);
+            if (photoFile) {
+                formData.append('photo', photoFile);
+            }
 
-            // Show success
-            document.getElementById('memoryForm').style.display = 'none';
-            document.getElementById('successMsg').classList.add('visible');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            try {
+                const res = await fetch(`${API_BASE}/api/memories/${MEMORIAL_SLUG}`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Submission failed');
+                }
+
+                // Show success
+                document.getElementById('memoryForm').style.display = 'none';
+                document.getElementById('successMsg').classList.add('visible');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (e) {
+                showError(e.message || 'Something went wrong. Please try again.');
+                btn.disabled = false;
+                btn.classList.remove('loading');
+                btn.textContent = 'Share This Memory';
+            }
+        }
+
+        // --- Load Existing Approved Memories ---
+        async function loadMemories() {
+            try {
+                const res = await fetch(`${API_BASE}/api/memories/${MEMORIAL_SLUG}`);
+                const memories = await res.json();
+
+                if (memories.length > 0) {
+                    const section = document.getElementById('memoriesSection');
+                    const list = document.getElementById('memoriesList');
+                    section.style.display = 'block';
+
+                    list.innerHTML = memories.map(m => `
+                        <div class="memory-card">
+                            <div class="mc-text">"${escapeHtml(m.memory)}"</div>
+                            <div class="mc-author">— ${escapeHtml(m.name)}${m.relationship ? ', ' + escapeHtml(m.relationship) : ''}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {
+                // Silently fail — memories section just won't show
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
         }
 
         // --- Reset ---
@@ -456,7 +579,11 @@
             document.getElementById('relationship').value = '';
             document.getElementById('memoryText').value = '';
             document.getElementById('photoPreview').innerHTML = '';
-            photos = [];
+            photoFile = null;
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.textContent = 'Share This Memory';
             document.getElementById('successMsg').classList.remove('visible');
             document.getElementById('memoryForm').style.display = 'block';
         }
